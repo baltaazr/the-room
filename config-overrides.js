@@ -21,10 +21,12 @@ module.exports = override(
   babelInclude([
     path.resolve(__dirname, 'src'),
     path.resolve(__dirname, 'config'),
-    path.resolve(__dirname, 'electron')
+    path.resolve(__dirname, 'electron'),
+    path.resolve(__dirname, 'core')
   ]),
   addWebpackAlias({
     ['electron']: path.resolve(__dirname, 'electron'),
-    ['config']: path.resolve(__dirname, 'config')
+    ['config']: path.resolve(__dirname, 'config'),
+    ['core']: path.resolve(__dirname, 'core')
   })
 )
