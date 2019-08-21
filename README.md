@@ -2,8 +2,6 @@
 
 ## Installation
 
-faggot
-
 ```bash
 # Cloning the project
 cd https://github.com/balta-z-r/the-room.git
