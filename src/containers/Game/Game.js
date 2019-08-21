@@ -1,5 +1,3 @@
-import logo from '../assets/logo.png'
-
 import React from 'react'
 import styled from 'styled-components'
 
@@ -14,17 +12,6 @@ const Wrapper = styled.div`
   height: 100%;
   background: ${color};
 `
+const Game = () => <Wrapper>not funny, didn't laugh</Wrapper>
 
-const AppLogo = styled.img`
-  width: 60%;
-`
-
-function App() {
-  return (
-    <Wrapper>
-      <AppLogo src={logo} alt="logo" />
-    </Wrapper>
-  )
-}
-
-export default App
+export default Game
