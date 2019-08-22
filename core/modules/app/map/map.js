@@ -1,4 +1,4 @@
-import Room from './room'
+import Room from '../room/room'
 
 class Map {
   constructor() {
