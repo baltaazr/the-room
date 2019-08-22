@@ -76,7 +76,7 @@ class PlayerSprite {
       if (this.globalPos.y - VERT_DELTA > MAP_HEIGHT) {
         console.log('got to border')
       } else {
-        this.globalPos.y -= VERT_DELTA
+        this.globalPos.y += VERT_DELTA
       }
 
       if (this.windowPos.y + VERT_DELTA > this.p.height - VIEWPORT_PADDING) {
