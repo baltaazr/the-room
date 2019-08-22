@@ -1,7 +1,13 @@
 import p5 from 'p5'
 
+import Map from './modules/map'
+import Player from './modules/player'
+
 class Game {
   constructor(container) {
+    const player = new Player()
+    const map = new Map()
+
     this.sketch = p => {
       p.setup = () => {
         const myCanvas = p.createCanvas(600, 400, p.WEBGL)
@@ -10,14 +16,6 @@ class Game {
 
       p.draw = () => {
         p.background(100)
-        p.normalMaterial()
-        p.noStroke()
-        p.push()
-        p.rotateZ(p.frameCount * 0.01)
-        p.rotateX(p.frameCount * 0.01)
-        p.rotateY(p.frameCount * 0.01)
-        p.box(100)
-        p.pop()
       }
     }
 
