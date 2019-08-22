@@ -101,10 +101,10 @@ class PlayerSprite {
     }
 
     if (this.p.keyIsDown(Helpers.getAscii('D'))) {
-      if (this.globalPos.x - HORZ_DELTA > MAP_WIDTH) {
+      if (this.globalPos.x + HORZ_DELTA > MAP_WIDTH) {
         console.log('got to border')
       } else {
-        this.globalPos.x -= HORZ_DELTA
+        this.globalPos.x += HORZ_DELTA
       }
 
       if (this.windowPos.x + HORZ_DELTA > this.p.width - VIEWPORT_PADDING) {
