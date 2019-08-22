@@ -1,26 +1,29 @@
-import p5 from 'p5'
+import { Player } from './modules/app'
 
-import Map from './modules/map'
-import Player from './modules/player'
+import p5 from 'p5'
 
 class Game {
   constructor(container) {
-    const player = new Player()
-    const map = new Map()
-
     this.sketch = p => {
+      this.player = new Player(p)
+
       p.setup = () => {
-        const myCanvas = p.createCanvas(600, 400, p.WEBGL)
+        const myCanvas = p.createCanvas(600, 400)
         myCanvas.parent(container)
       }
 
       p.draw = () => {
-        p.background(100)
+        p.background('#160f30')
+        this.update()
       }
     }
 
     // eslint-disable-next-line new-cap
     this.p5instance = new p5(this.sketch)
+  }
+
+  update = () => {
+    this.player.update()
   }
 }
 
