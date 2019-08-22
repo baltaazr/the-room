@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
+import TheRoom from 'core/game'
+import P5Wrapper from 'react-p5-wrapper'
 
 const color = '#1D1F27'
 
@@ -12,6 +14,25 @@ const Wrapper = styled.div`
   height: 100%;
   background: ${color};
 `
-const Game = () => <Wrapper>not funny, didn't laugh</Wrapper>
+
+const Game = () => {
+  const sketch = useRef(null)
+
+  useEffect(() => {
+    document.title = 'The Room'
+
+    const game = new TheRoom(sketch)
+
+    return () => {
+      game.terminate()
+    }
+  })
+
+  return (
+    <Wrapper>
+      <P5Wrapper sketch={sketch.current} />
+    </Wrapper>
+  )
+}
 
 export default Game
