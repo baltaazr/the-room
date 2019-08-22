@@ -30,7 +30,7 @@ const Game = () => {
 
   return (
     <Wrapper>
-      <P5Wrapper sketch={sketch.current} />
+      <P5Wrapper ref={sketch} />
     </Wrapper>
   )
 }
