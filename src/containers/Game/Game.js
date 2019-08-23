@@ -14,7 +14,9 @@ const Wrapper = styled.div`
   background: ${color};
 `
 
-const GameWrapper = styled.div``
+const GameWrapper = styled.div`
+  position: relative;
+`
 
 const Game = () => {
   const mount = useRef(null)

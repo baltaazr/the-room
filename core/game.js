@@ -9,16 +9,20 @@ class Game {
   constructor(container) {
     this.sketch = p => {
       this.player = new Player(p)
-      this.map = new Map()
+      this.map = new Map(p)
       this.enemy = new Enemy()
 
       p.preload = () => {
+        this.map.sprite.loadSprite()
         this.player.sprite.loadSprite()
       }
 
       p.setup = () => {
         const myCanvas = p.createCanvas(600, 400, p.WEBGL)
         myCanvas.parent(container)
+
+        p.textFont('Helvetica')
+        p.textAlign(p.CENTER, p.CENTER)
       }
 
       p.draw = () => {
@@ -32,6 +36,7 @@ class Game {
   }
 
   update = () => {
+    this.map.update()
     this.player.update()
   }
 

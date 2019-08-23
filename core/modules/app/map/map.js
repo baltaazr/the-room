@@ -1,16 +1,20 @@
 import Room from '../room/room'
+import WallSprite from '../../interfaces/wallSprite/wallSprite'
 
 import Config from 'config'
 
 const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 
 class Map {
-  constructor() {
+  constructor(p) {
     this.level = 1
     this.startingRoom = new Room(0, 0)
     this.startingRoom.updateGrid(0, 0, ENEMY_GRID_VAL)
     this.currentRoom = this.startingRoom
     this.rooms = { '0,0': this.startingRoom }
+
+    this.sprite = new WallSprite(p)
+
     this.initiateRooms()
   }
 
@@ -56,6 +60,10 @@ class Map {
 
   move = dir => {
     this.currentRoom = this.currentRoom[dir]
+  }
+
+  update = () => {
+    this.sprite.draw()
   }
 
   getSurroundings = room => {
