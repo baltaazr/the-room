@@ -79,7 +79,7 @@ export default class Controls {
         this.windowPos.x -= HORZ_DELTA
       }
 
-      this.player.sprite.flip()
+      this.player.sprite.flipLeft()
     }
 
     if (this.p.keyIsDown(Helpers.getAscii('D'))) {
@@ -94,6 +94,8 @@ export default class Controls {
       } else {
         this.windowPos.x += HORZ_DELTA
       }
+
+      this.player.sprite.flipRight()
     }
   }
 

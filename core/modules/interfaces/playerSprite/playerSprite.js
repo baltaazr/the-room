@@ -6,7 +6,7 @@ class PlayerSprite {
     this.globalPos = null
     this.windowPos = null
 
-    this.shouldFlip = false
+    this.isFlipped = false
 
     this.isSetup = false
   }
@@ -34,15 +34,13 @@ class PlayerSprite {
     this.p.rectMode(this.p.CENTER)
     this.p.fill('#eae7af')
     if (this.imageData.length) {
-      if (this.shouldFlip) {
-        this.p.scale(-1, 1)
-      }
+      if (this.isFlipped) this.p.scale(-1, 1)
+
       this.p.image(
         this.imageData[this.p.frameCount % 5],
-        (wx + (this.shouldFlip ? 32 : 0)) * (this.shouldFlip ? -1 : 1),
+        (wx + (this.isFlipped ? 32 : 0)) * (this.isFlipped ? -1 : 1),
         wy
       )
-      this.shouldFlip = false
     } else this.p.rect(wx, wy, 20, 20)
     this.p.pop()
 
@@ -56,7 +54,9 @@ class PlayerSprite {
     this.p.pop()
   }
 
-  flip = () => (this.shouldFlip = true)
+  flipLeft = () => (this.isFlipped = true)
+
+  flipRight = () => (this.isFlipped = false)
 }
 
 export default PlayerSprite
