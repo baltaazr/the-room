@@ -40,10 +40,11 @@ class PlayerSprite {
     this.p.push()
     this.p.rectMode(this.p.CENTER)
     this.p.fill('#eae7af')
-    if (this.imageData.length) {
-      console.log(this.imageData[this.p.frameCount % 5])
-      this.p.image(this.imageData[this.p.frameCount % 5], wx, wy)
-    } else this.p.rect(wx, wy, 20, 20)
+    // if (this.imageData.length) {
+    // console.log(this.imageData[this.p.frameCount % 5])
+    // this.p.image(this.imageData[this.p.frameCount % 5], wx, wy)
+    // } else
+    this.p.rect(wx, wy, 20, 20)
     this.p.pop()
 
     /* -------------------------------------------------------------------------- */
