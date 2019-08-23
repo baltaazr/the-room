@@ -9,8 +9,9 @@ const HORZ_ACC = Config.game.player.acc.horizontal
 const VIEWPORT_PADDING = Config.game.render.viewportPadding
 
 export default class Controls {
-  constructor(p) {
+  constructor(p, player) {
     this.p = p
+    this.player = player
 
     this.globalPos = null
     this.windowPos = null
@@ -77,6 +78,8 @@ export default class Controls {
       } else {
         this.windowPos.x -= HORZ_DELTA
       }
+
+      this.player.sprite.flip()
     }
 
     if (this.p.keyIsDown(Helpers.getAscii('D'))) {

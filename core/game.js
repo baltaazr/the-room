@@ -8,7 +8,7 @@ class Game {
       this.player = new Player(p)
 
       p.preload = () => {
-        // this.player.sprite.loadSprite()
+        this.player.sprite.loadSprite()
       }
 
       p.setup = () => {
