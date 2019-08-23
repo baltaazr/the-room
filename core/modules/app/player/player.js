@@ -4,7 +4,7 @@ import Controls from './controls'
 
 export default class Player {
   constructor(p) {
-    this.controls = new Controls(p)
+    this.controls = new Controls(p, this)
 
     this.sprite = new PlayerSprite(p)
   }

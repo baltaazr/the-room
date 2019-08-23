@@ -13,7 +13,7 @@ class Game {
       this.enemy = new Enemy()
 
       p.preload = () => {
-        // this.player.sprite.loadSprite()
+        this.player.sprite.loadSprite()
       }
 
       p.setup = () => {
