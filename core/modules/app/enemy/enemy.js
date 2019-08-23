@@ -1,3 +1,9 @@
+import Config from 'config'
+
+const ROOM_WIDTH = Config.game.room.width
+const ROOM_HEIGHT = Config.game.room.height
+const ROOM_RADIUS = Config.game.room.radius
+
 class Enemy {
   constructor() {
     this.room = [0, 0]
@@ -22,18 +28,18 @@ class Enemy {
       }
     }
 
-    if (newPosition[0] > 4) {
+    if (newPosition[0] > ROOM_RADIUS) {
       this.room[0] += 1
-      this.roomCoords[0] = -4
-    } else if (newPosition[0] < -4) {
+      this.roomCoords[0] = -ROOM_RADIUS
+    } else if (newPosition[0] < -ROOM_RADIUS) {
       this.room[0] -= 1
-      this.roomCoords[0] = 4
-    } else if (newPosition[1] > 4) {
+      this.roomCoords[0] = ROOM_RADIUS
+    } else if (newPosition[1] > ROOM_RADIUS) {
       this.room[1] += 1
-      this.roomCoords[1] = -4
-    } else if (newPosition[1] < -4) {
+      this.roomCoords[1] = -ROOM_RADIUS
+    } else if (newPosition[1] < -ROOM_RADIUS) {
       this.room[1] -= 1
-      this.roomCoords[1] = 4
+      this.roomCoords[1] = ROOM_RADIUS
     } else {
       this.roomCoords = newPosition
     }
@@ -49,7 +55,10 @@ class Enemy {
   }
 
   getAbsoluteCoords = (room, roomCoords) => {
-    return [room[0] + roomCoords[0] / 9, room[1] + roomCoords[1] / 9]
+    return [
+      room[0] + roomCoords[0] / ROOM_WIDTH,
+      room[1] + roomCoords[1] / ROOM_HEIGHT
+    ]
   }
 
   getDist = (p1, p2) => Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)

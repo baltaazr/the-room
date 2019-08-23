@@ -1,27 +1,35 @@
 import Room from '../room/room'
 
+import Config from 'config'
+
+const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
+
 class Map {
   constructor() {
     this.level = 1
-    this.rooms = new Array(this.level)
+    this.startingRoom = new Room(0, 0)
+    this.startingRoom.updateGrid(0, 0, ENEMY_GRID_VAL)
+    this.currentRoom = this.startingRoom
+    this.rooms = { '0,0': this.startingRoom }
     this.initiateRooms()
   }
 
   initiateRooms = () => {
-    const startingRoom = new Room(0, 0)
-
     const paths = [
-      [0, 1, startingRoom],
-      [1, 0, startingRoom],
-      [0, -1, startingRoom],
-      [-1, 0, startingRoom]
+      [0, 1, this.startingRoom, 'south'],
+      [1, 0, this.startingRoom, 'west'],
+      [0, -1, this.startingRoom, 'north'],
+      [-1, 0, this.startingRoom, 'south']
     ]
-    const rooms = [startingRoom]
     const roomsStrings = ['0,0']
+    const rooms = [this.startingRoom]
     for (let i = 0; i < this.level; i++) {
-      const temp = paths.splice(Math.floor(Math.random() * paths.length), 1)
+      const temp = paths.splice(Math.floor(Math.random() * paths.length), 1)[0]
       temp[2].end = false
       const newRoom = new Room(temp[0], temp[1])
+      // eslint-disable-next-line prefer-destructuring
+      newRoom[temp[3]] = temp[2]
+      temp[2][this.getOppositeDir(temp[3])] = newRoom
       const newPaths = this.getSurroundings(newRoom)
       for (let n = 0; n < newPaths.length; n++) {
         const newPath = newPaths[n]
@@ -30,6 +38,7 @@ class Map {
         }
       }
       rooms.push(newRoom)
+      this.rooms[`${newRoom.x},${newRoom.y}`] = newRoom
       roomsStrings.push(`${newRoom.x},${newRoom.y}`)
     }
 
@@ -43,17 +52,34 @@ class Map {
     }
 
     endingRooms[Math.floor(Math.random() * endingRooms.length)].trueEnd = true
+  }
 
-    return rooms
+  move = dir => {
+    this.currentRoom = this.currentRoom[dir]
   }
 
   getSurroundings = room => {
     return [
-      [room.x, room.y + 1, room],
-      [room.x + 1, room.y, room],
-      [room.x, room.y - 1, room],
-      [room.x - 1, room.y, room]
+      [room.x, room.y + 1, room, 'south'],
+      [room.x + 1, room.y, room, 'west'],
+      [room.x, room.y - 1, room, 'north'],
+      [room.x - 1, room.y, room, 'east']
     ]
+  }
+
+  getOppositeDir = dir => {
+    switch (dir) {
+      case 'south':
+        return 'north'
+      case 'west':
+        return 'east'
+      case 'north':
+        return 'south'
+      case 'east':
+        return 'west'
+      default:
+        return ''
+    }
   }
 }
 

@@ -16,6 +16,15 @@ const Config = {
     map: {
       width: 5000,
       height: 3000
+    },
+    room: {
+      width: 9,
+      height: 9,
+      radius: 4,
+      gridVals: {
+        empty: 0,
+        enemy: 1
+      }
     }
   }
 }
