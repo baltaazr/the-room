@@ -17,7 +17,7 @@ class Game {
       }
 
       p.setup = () => {
-        const myCanvas = p.createCanvas(600, 400)
+        const myCanvas = p.createCanvas(600, 400, p.WEBGL)
         myCanvas.parent(container)
       }
 
