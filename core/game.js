@@ -7,6 +7,10 @@ class Game {
     this.sketch = p => {
       this.player = new Player(p)
 
+      p.preload = () => {
+        // this.player.sprite.loadSprite()
+      }
+
       p.setup = () => {
         const myCanvas = p.createCanvas(600, 400)
         myCanvas.parent(container)

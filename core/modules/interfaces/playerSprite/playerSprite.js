@@ -1,3 +1,5 @@
+// import PlayerWalkImg from '../../../assets/Owlet_Monster_Walk_6.png'
+
 class PlayerSprite {
   constructor(p) {
     this.p = p
@@ -6,6 +8,27 @@ class PlayerSprite {
 
     this.isSetup = false
   }
+
+  // loadSprite = () => {
+  //   this.imageData = []
+  //   const newImage = new Image()
+  //   newImage.onload = () => {
+  //     Promise.all([
+  //       // Cut out two sprites from the sprite sheet
+  //       createImageBitmap(newImage, 0, 0, 32, 32),
+  //       createImageBitmap(newImage, 32, 0, 32, 32),
+  //       createImageBitmap(newImage, 64, 0, 32, 32),
+  //       createImageBitmap(newImage, 128, 0, 32, 32),
+  //       createImageBitmap(newImage, 160, 0, 32, 32),
+  //       createImageBitmap(newImage, 192, 0, 32, 32)
+  //     ]).then(sprites => {
+  //       // Draw each sprite onto the canvas
+  //       this.imageData.push(...sprites)
+  //       console.log(this.imageData)
+  //     })
+  //   }
+  //   newImage.src = PlayerWalkImg
+  // }
 
   draw = (windowPos, globalPos) => {
     const { x: wx, y: wy } = windowPos
@@ -17,7 +40,10 @@ class PlayerSprite {
     this.p.push()
     this.p.rectMode(this.p.CENTER)
     this.p.fill('#eae7af')
-    this.p.rect(wx, wy, 20, 20)
+    if (this.imageData.length) {
+      console.log(this.imageData[this.p.frameCount % 5])
+      this.p.image(this.imageData[this.p.frameCount % 5], wx, wy)
+    } else this.p.rect(wx, wy, 20, 20)
     this.p.pop()
 
     /* -------------------------------------------------------------------------- */
