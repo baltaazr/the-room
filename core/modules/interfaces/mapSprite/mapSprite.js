@@ -9,6 +9,7 @@ const HORZ_WALL_SIZE = Config.game.room.horzWallSize
 const ROOM_WIDTH = Config.game.room.width
 const ROOM_HEIGHT = Config.game.room.height
 const ROOM_RADIUS = Config.game.room.radius
+const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 
 class MapSprite {
   constructor(p, player) {
@@ -141,7 +142,7 @@ class MapSprite {
           (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
         )
         switch (room.getVal(c - ROOM_RADIUS, r - ROOM_RADIUS)) {
-          case 1:
+          case ENEMY_GRID_VAL:
             this.p.circle(
               (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
               (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y,
@@ -177,6 +178,15 @@ class MapSprite {
           WINDOW_COORDS.x + FLOOR_SIZE,
           -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
         )
+        for (let i = -1; i < 2; i++) {
+          if (room.getValTunnels(0, i) === ENEMY_GRID_VAL) {
+            this.p.image(
+              this.floors[room.floorGridTunnels[0][1]],
+              WINDOW_COORDS.x + FLOOR_SIZE * i,
+              -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
+            )
+          }
+        }
       }
       if (room.bottom) {
         this.p.image(
@@ -212,6 +222,15 @@ class MapSprite {
             WINDOW_COORDS.x,
           (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
         )
+        for (let i = -1; i < 2; i++) {
+          if (room.getValTunnels(1, i) === ENEMY_GRID_VAL) {
+            this.p.image(
+              this.floors[room.floorGridTunnels[1][1]],
+              WINDOW_COORDS.x + FLOOR_SIZE * i,
+              (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
+            )
+          }
+        }
       }
 
       if (room.left) {
@@ -248,6 +267,15 @@ class MapSprite {
             (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
           FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE
         )
+        for (let i = -1; i < 2; i++) {
+          if (room.getValTunnels(2, i) === ENEMY_GRID_VAL) {
+            this.p.image(
+              this.floors[room.floorGridTunnels[2][1]],
+              -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
+              WINDOW_COORDS.y + FLOOR_SIZE * i
+            )
+          }
+        }
       }
       if (room.right) {
         this.p.image(
@@ -283,6 +311,15 @@ class MapSprite {
             (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
           FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE
         )
+        for (let i = -1; i < 2; i++) {
+          if (room.getValTunnels(3, i) === ENEMY_GRID_VAL) {
+            this.p.image(
+              this.floors[room.floorGridTunnels[3][1]],
+              (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
+              WINDOW_COORDS.y + FLOOR_SIZE * i
+            )
+          }
+        }
       }
     }
   }

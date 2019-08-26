@@ -1,11 +1,9 @@
 import { Player, Map, Enemy } from './modules/app'
-import Helpers from './utils/helpers'
 import Debug from './modules/interfaces/debug/debug'
 
 import Config from 'config'
 import p5 from 'p5'
 
-const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 const FLOOR_SIZE = Config.game.room.floorSize
 const MAP_WIDTH = Config.game.map.width
 const MAP_HEIGHT = Config.game.map.height
@@ -15,7 +13,7 @@ class Game {
     this.sketch = p => {
       this.player = new Player(p, this.playerMove)
       this.map = new Map(p, this.player)
-      this.enemy = new Enemy()
+      this.enemy = new Enemy(this.map.startingRoom)
 
       this.player.registerMap(this.map)
 
@@ -39,7 +37,7 @@ class Game {
         this.update()
       }
     }
-
+    this.initiateEnemyMovement()
     // eslint-disable-next-line new-cap
     this.p5instance = new p5(this.sketch)
   }
@@ -52,35 +50,34 @@ class Game {
 
   enemyMove = () => {
     this.enemy.move(this.player)
-
-    this.map.rooms[
-      Helpers.getRoomRep(this.enemy.room[0], this.enemy.room[1])
-    ].updateGrid(
-      this.enemy.roomCoords[0],
-      this.enemy.roomCoords[1],
-      ENEMY_GRID_VAL
-    )
   }
 
   playerMove = () => {
-    // if (
-    //   Math.abs(
-    //     this.player.controls.globalPos.x - this.map.endingGlobalCoords.x
-    //   ) <=
-    //     FLOOR_SIZE / 2 &&
-    //   Math.abs(
-    //     this.player.controls.globalPos.y - this.map.endingGlobalCoords.y
-    //   ) <=
-    //     FLOOR_SIZE / 2
-    // ) {
-    //   this.map.level += 1
-    //   this.map.initiateRooms()
-    //   this.player.controls.globalPos = { x: MAP_WIDTH / 2, y: MAP_HEIGHT / 2 }
-    //   this.player.controls.windowPos = {
-    //     x: this.p.width / 2,
-    //     y: this.p.height / 2
-    //   }
-    // }
+    if (
+      Math.abs(
+        this.player.controls.globalPos.x - this.map.endingGlobalCoords.x
+      ) <=
+        FLOOR_SIZE / 2 &&
+      Math.abs(
+        this.player.controls.globalPos.y - this.map.endingGlobalCoords.y
+      ) <=
+        FLOOR_SIZE / 2
+    ) {
+      this.map.level += 1
+      this.map.initiateRooms()
+      this.player.controls.globalPos = { x: MAP_WIDTH / 2, y: MAP_HEIGHT / 2 }
+      this.player.controls.windowPos = {
+        x: this.player.controls.p.width / 2,
+        y: this.player.controls.p.height / 2
+      }
+    }
+  }
+
+  initiateEnemyMovement = () => {
+    setTimeout(() => {
+      this.enemyMove()
+      this.initiateEnemyMovement()
+    }, 1000)
   }
 }
 

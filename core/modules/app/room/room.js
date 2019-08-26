@@ -13,6 +13,15 @@ class Room {
     for (let i = 0; i < ROOM_WIDTH; i++) {
       this.grid[i] = new Array(ROOM_HEIGHT)
     }
+    // [TOP,BOTTOM,LEFT,RIGHT] NEGATIVE -> POSITIVE
+    this.gridTunnels = new Array(4)
+    for (let i = 0; i < 4; i++) {
+      this.gridTunnels[i] = new Array(3)
+      for (let n = 0; n < 3; n++) {
+        this.gridTunnels[i][n] = Math.floor(Math.random() * 12)
+      }
+    }
+
     this.floorGrid = new Array(ROOM_WIDTH)
     for (let r = 0; r < ROOM_WIDTH; r++) {
       this.floorGrid[r] = new Array(ROOM_HEIGHT)
@@ -20,6 +29,7 @@ class Room {
         this.floorGrid[r][c] = Math.floor(Math.random() * 12)
       }
     }
+    // [TOP,BOTTOM,LEFT,RIGHT] NEGATIVE -> POSITIVE
     this.floorGridTunnels = new Array(4)
     for (let i = 0; i < 4; i++) {
       this.floorGridTunnels[i] = new Array(3)
@@ -31,10 +41,16 @@ class Room {
   }
 
   updateGrid = (x, y, val) => {
-    this.grid[x + ROOM_RADIUS][y + ROOM_RADIUS] = val
+    this.grid[y + ROOM_RADIUS][x + ROOM_RADIUS] = val
+  }
+
+  updateTunnels = (n, i, val) => {
+    this.gridTunnels[n][i] = val
   }
 
   getVal = (x, y) => this.grid[x + ROOM_RADIUS][y + ROOM_RADIUS]
+
+  getValTunnels = (n, i) => this.gridTunnels[n][i]
 }
 
 export default Room
