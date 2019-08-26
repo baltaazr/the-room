@@ -4,14 +4,18 @@ import Debug from './modules/interfaces/debug/debug'
 import Config from 'config'
 import p5 from 'p5'
 
+<<<<<<< HEAD
 const FLOOR_SIZE = Config.game.room.floorSize
 const MAP_WIDTH = Config.game.map.width
 const MAP_HEIGHT = Config.game.map.height
+=======
+const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
+>>>>>>> 32e95c8f8a27762ea11a0fd73bd383109863120b
 
 class Game {
   constructor(container) {
     this.sketch = p => {
-      this.player = new Player(p, this.playerMove)
+      this.player = new Player(p)
       this.map = new Map(p, this.player)
       this.enemy = new Enemy(this.map.startingRoom)
 
@@ -51,6 +55,7 @@ class Game {
   enemyMove = () => {
     this.enemy.move(this.player)
   }
+<<<<<<< HEAD
 
   playerMove = () => {
     if (
@@ -79,6 +84,8 @@ class Game {
       this.initiateEnemyMovement()
     }, 1000)
   }
+=======
+>>>>>>> 32e95c8f8a27762ea11a0fd73bd383109863120b
 }
 
 export default Game
