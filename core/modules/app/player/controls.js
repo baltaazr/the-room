@@ -31,14 +31,19 @@ export default class Controls {
       this.player.isSetup = true
     }
 
-    this.handleInput()
+    this.handleInputAndCollision()
   }
 
-  handleInput = () => {
+  handleInputAndCollision = () => {
     const deltaFactor = this.p.deltaTime / 50
 
     const VERT_DELTA = VERT_ACC * deltaFactor
     const HORZ_DELTA = HORZ_ACC * deltaFactor
+
+    const UP_PRESSED = this.p.keyIsDown(Helpers.getAscii('W'))
+    const DOWN_PRESSED = this.p.keyIsDown(Helpers.getAscii('S'))
+    const LEFT_PRESSED = this.p.keyIsDown(Helpers.getAscii('A'))
+    const RIGHT_PRESSED = this.p.keyIsDown(Helpers.getAscii('D'))
 
     const { x, y } = Helpers.mapPlayerToRoomNumber(this.globalPos)
     const currRoom = this.map.getRoomByCoords(x, y)
@@ -47,104 +52,107 @@ export default class Controls {
 
     const roomBoundaries = Helpers.getRoomBoundaries(x, y)
 
-    if (this.p.keyIsDown(Helpers.getAscii('W'))) {
+    const { minY: hMinY, maxY: hMaxY } = Helpers.getHallwayBoundaries(
+      roomBoundaries,
+      'vertical'
+    )
+    const { minX: hMinX, maxX: hMaxX } = Helpers.getHallwayBoundaries(
+      roomBoundaries,
+      'horizontal'
+    )
+
+    if (UP_PRESSED) {
+      let playerMoved = false
       if (
         this.globalPos.y - VERT_DELTA <
         roomBoundaries.minY + ROOM_BORDER_PADDING_NY
       ) {
         if (currRoom.top) {
-          const hallwayBoundaries = Helpers.getHallwayBoundaries(
-            roomBoundaries,
-            'top'
-          )
-          if (hallwayBoundaries) {
-            const { minX, maxX } = hallwayBoundaries
-            if (Helpers.isBetween(minX, this.globalPos.x, maxX))
-              this.globalPos.y -= VERT_DELTA
+          if (Helpers.isBetween(hMinX, this.globalPos.x, hMaxX)) {
+            this.globalPos.y -= VERT_DELTA
+            playerMoved = true
           }
         }
       } else {
         this.globalPos.y -= VERT_DELTA
+        playerMoved = true
       }
 
-      if (this.windowPos.y - VERT_DELTA >= VIEWPORT_PADDING) {
+      if (playerMoved && this.windowPos.y - VERT_DELTA >= VIEWPORT_PADDING) {
         this.windowPos.y -= VERT_DELTA
       }
     }
 
-    if (this.p.keyIsDown(Helpers.getAscii('S'))) {
+    if (DOWN_PRESSED) {
+      let playerMoved = false
       if (
         this.globalPos.y - VERT_DELTA >
         roomBoundaries.maxY - ROOM_BORDER_PADDING_PY
       ) {
         if (currRoom.bottom) {
-          const hallwayBoundaries = Helpers.getHallwayBoundaries(
-            roomBoundaries,
-            'bottom'
-          )
-          if (hallwayBoundaries) {
-            const { minX, maxX } = hallwayBoundaries
-            if (Helpers.isBetween(minX, this.globalPos.x, maxX))
-              this.globalPos.y += VERT_DELTA
+          if (Helpers.isBetween(hMinX, this.globalPos.x, hMaxX)) {
+            this.globalPos.y += VERT_DELTA
+            playerMoved = true
           }
         }
       } else {
         this.globalPos.y += VERT_DELTA
+        playerMoved = true
       }
 
-      if (this.windowPos.y + VERT_DELTA <= this.p.height - VIEWPORT_PADDING) {
+      if (
+        playerMoved &&
+        this.windowPos.y + VERT_DELTA <= this.p.height - VIEWPORT_PADDING
+      ) {
         this.windowPos.y += VERT_DELTA
       }
     }
 
-    if (this.p.keyIsDown(Helpers.getAscii('A'))) {
+    if (LEFT_PRESSED) {
+      let playerMoved = false
       if (
         this.globalPos.x - HORZ_DELTA <
         roomBoundaries.minX + ROOM_BORDER_PADDING_NX
       ) {
         if (currRoom.left) {
-          const hallwayBoundaries = Helpers.getHallwayBoundaries(
-            roomBoundaries,
-            'left'
-          )
-          if (hallwayBoundaries) {
-            const { minY, maxY } = hallwayBoundaries
-            if (Helpers.isBetween(minY, this.globalPos.y, maxY))
-              this.globalPos.x -= HORZ_DELTA
+          if (Helpers.isBetween(hMinY, this.globalPos.y, hMaxY)) {
+            this.globalPos.x -= HORZ_DELTA
+            playerMoved = true
           }
         }
       } else {
         this.globalPos.x -= HORZ_DELTA
+        playerMoved = true
       }
 
-      if (this.windowPos.x - HORZ_DELTA >= VIEWPORT_PADDING) {
+      if (playerMoved && this.windowPos.x - HORZ_DELTA >= VIEWPORT_PADDING) {
         this.windowPos.x -= HORZ_DELTA
       }
 
       this.player.sprite.flipLeft()
     }
 
-    if (this.p.keyIsDown(Helpers.getAscii('D'))) {
+    if (RIGHT_PRESSED) {
+      let playerMoved = false
       if (
         this.globalPos.x + HORZ_DELTA >
         roomBoundaries.maxX - ROOM_BORDER_PADDING_PX
       ) {
         if (currRoom.right) {
-          const hallwayBoundaries = Helpers.getHallwayBoundaries(
-            roomBoundaries,
-            'right'
-          )
-          if (hallwayBoundaries) {
-            const { minY, maxY } = hallwayBoundaries
-            if (Helpers.isBetween(minY, this.globalPos.y, maxY))
-              this.globalPos.x += HORZ_DELTA
+          if (Helpers.isBetween(hMinY, this.globalPos.y, hMaxY)) {
+            this.globalPos.x += HORZ_DELTA
+            playerMoved = true
           }
         }
       } else {
         this.globalPos.x += HORZ_DELTA
+        playerMoved = true
       }
 
-      if (this.windowPos.x + HORZ_DELTA <= this.p.width - VIEWPORT_PADDING) {
+      if (
+        playerMoved &&
+        this.windowPos.x + HORZ_DELTA <= this.p.width - VIEWPORT_PADDING
+      ) {
         this.windowPos.x += HORZ_DELTA
       }
 

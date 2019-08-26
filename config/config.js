@@ -27,10 +27,10 @@ const Config = {
         end: 2
       },
       padding: {
-        px: 18,
-        nx: 32,
-        py: 32,
-        ny: 16
+        px: 16,
+        nx: 30,
+        py: 28,
+        ny: 20
       },
       floorSize: 16,
       vertWallSize: 7,
