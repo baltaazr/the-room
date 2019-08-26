@@ -150,6 +150,7 @@ export default class Controls {
 
       this.player.sprite.flipRight()
     }
+    this.player.playerMove()
   }
 
   registerMap = map => (this.map = map)

@@ -9,10 +9,6 @@ const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 class Map {
   constructor(p, player) {
     this.level = 1
-    this.startingRoom = new Room(0, 0)
-    this.startingRoom.updateGrid(0, 0, ENEMY_GRID_VAL)
-    this.currentRoom = this.startingRoom
-    this.rooms = { '0,0': this.startingRoom }
 
     this.player = player
 
@@ -22,6 +18,9 @@ class Map {
   }
 
   initiateRooms = () => {
+    this.startingRoom = new Room(0, 0)
+    this.startingRoom.updateGrid(0, 0, ENEMY_GRID_VAL)
+    this.rooms = { '0,0': this.startingRoom }
     const paths = [
       [0, 1, this.startingRoom, 'top'],
       [1, 0, this.startingRoom, 'left'],
@@ -62,15 +61,15 @@ class Map {
       }
     }
 
-    endingRooms[Math.floor(Math.random() * endingRooms.length)].updateGrid(
-      0,
-      0,
-      2
-    )
-  }
+    const trueEndingRoom =
+      endingRooms[Math.floor(Math.random() * endingRooms.length)]
 
-  move = dir => {
-    this.currentRoom = this.currentRoom[dir]
+    trueEndingRoom.updateGrid(0, 0, 2)
+
+    this.endingGlobalCoords = Helpers.relativeToGlobal(
+      trueEndingRoom.x,
+      trueEndingRoom.y
+    )
   }
 
   update = () => {

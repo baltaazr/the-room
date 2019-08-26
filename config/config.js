@@ -34,9 +34,7 @@ const Config = {
       },
       floorSize: 16,
       vertWallSize: 7,
-      horzWallSize: 16,
-      endWidth: 14,
-      endHeight: 15
+      horzWallSize: 16
     }
   }
 }

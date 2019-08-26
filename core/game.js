@@ -6,11 +6,14 @@ import Config from 'config'
 import p5 from 'p5'
 
 const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
+const FLOOR_SIZE = Config.game.room.floorSize
+const MAP_WIDTH = Config.game.map.width
+const MAP_HEIGHT = Config.game.map.height
 
 class Game {
   constructor(container) {
     this.sketch = p => {
-      this.player = new Player(p)
+      this.player = new Player(p, this.playerMove)
       this.map = new Map(p, this.player)
       this.enemy = new Enemy()
 
@@ -59,8 +62,25 @@ class Game {
     )
   }
 
-  roomChange = dir => {
-    this.map.move(dir)
+  playerMove = () => {
+    // if (
+    //   Math.abs(
+    //     this.player.controls.globalPos.x - this.map.endingGlobalCoords.x
+    //   ) <=
+    //     FLOOR_SIZE / 2 &&
+    //   Math.abs(
+    //     this.player.controls.globalPos.y - this.map.endingGlobalCoords.y
+    //   ) <=
+    //     FLOOR_SIZE / 2
+    // ) {
+    //   this.map.level += 1
+    //   this.map.initiateRooms()
+    //   this.player.controls.globalPos = { x: MAP_WIDTH / 2, y: MAP_HEIGHT / 2 }
+    //   this.player.controls.windowPos = {
+    //     x: this.p.width / 2,
+    //     y: this.p.height / 2
+    //   }
+    // }
   }
 }
 

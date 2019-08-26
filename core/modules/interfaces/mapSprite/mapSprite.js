@@ -9,8 +9,6 @@ const HORZ_WALL_SIZE = Config.game.room.horzWallSize
 const ROOM_WIDTH = Config.game.room.width
 const ROOM_HEIGHT = Config.game.room.height
 const ROOM_RADIUS = Config.game.room.radius
-const END_WIDTH = Config.game.room.endWidth
-const END_HEIGHT = Config.game.room.endHeight
 
 class MapSprite {
   constructor(p, player) {
@@ -50,11 +48,10 @@ class MapSprite {
 
     this.p.fill('#eae7af')
     Object.keys(map).forEach(roomCoords => {
-      const coords = roomCoords.split(',')
       const room = map[roomCoords]
 
       // NO NEED TO EXTRACT. IT'S PASS BY REFERENCE
-      this.drawRoom(room, coords[0], coords[1])
+      this.drawRoom(room, room.x, room.y)
     })
     this.p.pop()
   }
@@ -229,7 +226,7 @@ class MapSprite {
           WINDOW_COORDS.y
         )
         this.p.image(
-          this.floors[room.floorGridTunnels[2][3]],
+          this.floors[room.floorGridTunnels[2][2]],
           -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
           WINDOW_COORDS.y + FLOOR_SIZE
         )
@@ -259,12 +256,12 @@ class MapSprite {
           WINDOW_COORDS.y - FLOOR_SIZE
         )
         this.p.image(
-          this.floors[room.floorGridTunnels[3][0]],
+          this.floors[room.floorGridTunnels[3][1]],
           (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
           WINDOW_COORDS.y
         )
         this.p.image(
-          this.floors[room.floorGridTunnels[3][0]],
+          this.floors[room.floorGridTunnels[3][2]],
           (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
           WINDOW_COORDS.y + FLOOR_SIZE
         )
