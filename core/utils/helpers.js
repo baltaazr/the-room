@@ -7,6 +7,8 @@ const TOTAL_ROOM_DIMENSION = 176
 export default class Helpers {
   static getAscii = c => c.charCodeAt(0)
 
+  static getRoomRep = (x, y) => `${x},${y}`
+
   // GET GLOBAL POSITION FOR A ROOM
   static relativeToGlobal = (x, y) => {
     // 0 should be MAP WIDTH/HEIGHT / 2
@@ -32,5 +34,15 @@ export default class Helpers {
       x: pWindowX + roomGDeltaXToPlayer,
       y: pWindowY + roomGDeltaYToPlayer
     }
+  }
+
+  static mapPlayerToRoomNumber = ({ x, y }) => {
+    const playerX = x - MAP_WIDTH / 2
+    const playerY = y - MAP_HEIGHT / 2
+
+    const roomX = Math.round(playerX / TOTAL_ROOM_DIMENSION)
+    const roomY = Math.round(playerY / TOTAL_ROOM_DIMENSION)
+
+    return { x: roomX, y: roomY }
   }
 }
