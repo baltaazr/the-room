@@ -36,16 +36,9 @@ class MapSprite {
     Object.keys(map).forEach(roomCoords => {
       const coords = roomCoords.split(',')
       const room = map[roomCoords]
-      this.drawRoom(
-        {
-          top: room.top,
-          bottom: room.bottom,
-          left: room.left,
-          right: room.right
-        },
-        coords[0],
-        coords[1]
-      )
+
+      // NO NEED TO EXTRACT. IT'S PASS BY REFERENCE
+      this.drawRoom(room, coords[0], coords[1])
     })
     this.p.pop()
   }
