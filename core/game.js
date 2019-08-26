@@ -34,6 +34,7 @@ class Game {
 
         p.textFont('Helvetica')
         p.textAlign(p.CENTER, p.CENTER)
+        p.smooth()
       }
 
       p.draw = () => {

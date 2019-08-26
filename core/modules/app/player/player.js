@@ -6,7 +6,7 @@ export default class Player {
   constructor(p) {
     this.controls = new Controls(p, this)
 
-    this.sprite = new PlayerSprite(p)
+    this.sprite = new PlayerSprite(p, this)
   }
 
   registerMap = map => {
