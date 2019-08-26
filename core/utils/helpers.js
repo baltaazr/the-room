@@ -60,23 +60,25 @@ export default class Helpers {
 
   static getHallwayBoundaries = (roomBoundaries, direction) => {
     switch (direction) {
-      case 'bottom':
-      case 'top':
+      case 'horizontal':
         return {
           minX: roomBoundaries.minX + SIDE_WALL_DIMENSION,
           maxX: roomBoundaries.maxX - SIDE_WALL_DIMENSION
         }
 
-      case 'left':
-      case 'right':
+      case 'vertical':
         return {
           minY: roomBoundaries.minY + SIDE_WALL_DIMENSION,
           maxY: roomBoundaries.maxY - SIDE_WALL_DIMENSION
         }
       default:
-        return undefined
+        return {
+          minY: Number.MAX_VALUE,
+          maxY: Number.MIN_VALUE
+        }
     }
   }
 
-  static isBetween = (min, val, max) => min <= val && val <= max
+  static isBetween = (min, val, max, epsilon = 0.1) =>
+    min + epsilon <= val && val <= max - epsilon
 }
