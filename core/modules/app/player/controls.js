@@ -15,18 +15,16 @@ export default class Controls {
 
     this.globalPos = null
     this.windowPos = null
-
-    this.isSetup = false
   }
 
   tick = () => {
     /* -------------------------------------------------------------------------- */
     /*                           SETUP ONCE CANVAS READY                          */
     /* -------------------------------------------------------------------------- */
-    if (!this.isSetup) {
+    if (!this.player.isSetup) {
       this.globalPos = { x: MAP_WIDTH / 2, y: MAP_HEIGHT / 2 }
-      this.windowPos = { x: 0, y: 0 }
-      this.isSetup = true
+      this.windowPos = { x: this.p.width / 2, y: this.p.height / 2 }
+      this.player.isSetup = true
     }
 
     this.handleInput()
@@ -45,10 +43,7 @@ export default class Controls {
         this.globalPos.y -= VERT_DELTA
       }
 
-      if (
-        this.windowPos.y - VERT_DELTA <
-        -this.p.height / 2 + VIEWPORT_PADDING
-      ) {
+      if (this.windowPos.y - VERT_DELTA < VIEWPORT_PADDING) {
         console.log('gotta move canvas')
       } else {
         this.windowPos.y -= VERT_DELTA
@@ -62,10 +57,7 @@ export default class Controls {
         this.globalPos.y += VERT_DELTA
       }
 
-      if (
-        this.windowPos.y + VERT_DELTA >
-        this.p.height / 2 - VIEWPORT_PADDING
-      ) {
+      if (this.windowPos.y + VERT_DELTA > this.p.height - VIEWPORT_PADDING) {
         console.log('gotta move canvas')
       } else {
         this.windowPos.y += VERT_DELTA
@@ -79,10 +71,7 @@ export default class Controls {
         this.globalPos.x -= HORZ_DELTA
       }
 
-      if (
-        this.windowPos.x - HORZ_DELTA <
-        -this.p.width / 2 + VIEWPORT_PADDING
-      ) {
+      if (this.windowPos.x - HORZ_DELTA < VIEWPORT_PADDING) {
         console.log('gotta move canvas')
       } else {
         this.windowPos.x -= HORZ_DELTA
@@ -98,7 +87,7 @@ export default class Controls {
         this.globalPos.x += HORZ_DELTA
       }
 
-      if (this.windowPos.x + HORZ_DELTA > this.p.width / 2 - VIEWPORT_PADDING) {
+      if (this.windowPos.x + HORZ_DELTA > this.p.width - VIEWPORT_PADDING) {
         console.log('gotta move canvas')
       } else {
         this.windowPos.x += HORZ_DELTA

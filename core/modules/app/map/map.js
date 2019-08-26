@@ -6,14 +6,16 @@ import Config from 'config'
 const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 
 class Map {
-  constructor(p) {
+  constructor(p, player) {
     this.level = 1
     this.startingRoom = new Room(0, 0)
     this.startingRoom.updateGrid(0, 0, ENEMY_GRID_VAL)
     this.currentRoom = this.startingRoom
     this.rooms = { '0,0': this.startingRoom }
 
-    this.sprite = new MapSprite(p)
+    this.player = player
+
+    this.sprite = new MapSprite(p, player)
 
     this.initiateRooms()
   }

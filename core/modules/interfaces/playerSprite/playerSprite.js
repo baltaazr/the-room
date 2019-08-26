@@ -3,11 +3,8 @@ import PlayerWalkImg from '../../../assets/Owlet_Monster_Walk_6.png'
 class PlayerSprite {
   constructor(p) {
     this.p = p
-    this.globalPos = null
-    this.windowPos = null
 
     this.isFlipped = false
-
     this.isSetup = false
   }
 

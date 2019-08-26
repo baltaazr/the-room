@@ -9,7 +9,7 @@ class Game {
   constructor(container) {
     this.sketch = p => {
       this.player = new Player(p)
-      this.map = new Map(p)
+      this.map = new Map(p, this.player)
       this.enemy = new Enemy()
 
       p.preload = () => {
@@ -18,7 +18,7 @@ class Game {
       }
 
       p.setup = () => {
-        const myCanvas = p.createCanvas(600, 400, p.WEBGL)
+        const myCanvas = p.createCanvas(600, 400)
         myCanvas.parent(container)
 
         p.textFont('Helvetica')
