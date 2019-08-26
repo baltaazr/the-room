@@ -24,7 +24,10 @@ const Config = {
       gridVals: {
         empty: 0,
         enemy: 1
-      }
+      },
+      floorSize: 16,
+      vertWallSize: 7,
+      horzWallSize: 16
     }
   }
 }

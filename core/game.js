@@ -40,7 +40,7 @@ class Game {
     this.player.update()
   }
 
-  move = () => {
+  enemyMove = () => {
     this.enemy.move(this.player)
 
     this.map.rooms[`${this.enemy.room[0]},${this.enemy.room[1]}`].updateGrid(
@@ -48,6 +48,10 @@ class Game {
       this.enemy.roomCoords[1],
       ENEMY_GRID_VAL
     )
+  }
+
+  roomChange = dir => {
+    this.map.move(dir)
   }
 }
 
