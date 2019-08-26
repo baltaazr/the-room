@@ -9,8 +9,8 @@ const Config = {
     },
     player: {
       acc: {
-        vertical: 10,
-        horizontal: 10
+        vertical: 5,
+        horizontal: 5
       }
     },
     map: {
