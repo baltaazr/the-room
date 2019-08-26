@@ -45,4 +45,15 @@ export default class Helpers {
 
     return { x: roomX, y: roomY }
   }
+
+  // ROOM X and Y
+  static getRoomBoundaries = (x, y) => {
+    const roomGlobal = Helpers.relativeToGlobal(x, y)
+    return {
+      minX: roomGlobal.x - TOTAL_ROOM_DIMENSION / 2,
+      minY: roomGlobal.y - TOTAL_ROOM_DIMENSION / 2,
+      maxX: roomGlobal.x + TOTAL_ROOM_DIMENSION / 2,
+      maxY: roomGlobal.y + TOTAL_ROOM_DIMENSION / 2
+    }
+  }
 }

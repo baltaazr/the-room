@@ -98,6 +98,8 @@ class Map {
         return ''
     }
   }
+
+  getRoomByCoords = (x, y) => this.rooms[Helpers.getRoomRep(x, y)]
 }
 
 export default Map

@@ -6,6 +6,10 @@ const MAP_WIDTH = Config.game.map.width
 const MAP_HEIGHT = Config.game.map.height
 const VERT_ACC = Config.game.player.acc.vertical
 const HORZ_ACC = Config.game.player.acc.horizontal
+const ROOM_BORDER_PADDING_PX = Config.game.room.padding.px
+const ROOM_BORDER_PADDING_PY = Config.game.room.padding.py
+const ROOM_BORDER_PADDING_NX = Config.game.room.padding.nx
+const ROOM_BORDER_PADDING_NY = Config.game.room.padding.ny
 const VIEWPORT_PADDING = Config.game.render.viewportPadding
 
 export default class Controls {
@@ -36,8 +40,18 @@ export default class Controls {
     const VERT_DELTA = VERT_ACC * deltaFactor
     const HORZ_DELTA = HORZ_ACC * deltaFactor
 
+    const { x, y } = Helpers.mapPlayerToRoomNumber(this.globalPos)
+    const currRoom = this.map.getRoomByCoords(x, y)
+
+    if (!currRoom) return
+
+    const roomBoundaries = Helpers.getRoomBoundaries(x, y)
+
     if (this.p.keyIsDown(Helpers.getAscii('W'))) {
-      if (this.globalPos.y - VERT_DELTA < 0) {
+      if (
+        this.globalPos.y - VERT_DELTA <
+        roomBoundaries.minY + ROOM_BORDER_PADDING_NY
+      ) {
         console.log('got to border')
       } else {
         this.globalPos.y -= VERT_DELTA
@@ -51,7 +65,10 @@ export default class Controls {
     }
 
     if (this.p.keyIsDown(Helpers.getAscii('S'))) {
-      if (this.globalPos.y - VERT_DELTA > MAP_HEIGHT) {
+      if (
+        this.globalPos.y - VERT_DELTA >
+        roomBoundaries.maxY - ROOM_BORDER_PADDING_PY
+      ) {
         console.log('got to border')
       } else {
         this.globalPos.y += VERT_DELTA
@@ -65,7 +82,10 @@ export default class Controls {
     }
 
     if (this.p.keyIsDown(Helpers.getAscii('A'))) {
-      if (this.globalPos.x - HORZ_DELTA < 0) {
+      if (
+        this.globalPos.x - HORZ_DELTA <
+        roomBoundaries.minX + ROOM_BORDER_PADDING_NX
+      ) {
         console.log('got to border')
       } else {
         this.globalPos.x -= HORZ_DELTA
@@ -81,7 +101,10 @@ export default class Controls {
     }
 
     if (this.p.keyIsDown(Helpers.getAscii('D'))) {
-      if (this.globalPos.x + HORZ_DELTA > MAP_WIDTH) {
+      if (
+        this.globalPos.x + HORZ_DELTA >
+        roomBoundaries.maxX - ROOM_BORDER_PADDING_PX
+      ) {
         console.log('got to border')
       } else {
         this.globalPos.x += HORZ_DELTA
@@ -96,6 +119,8 @@ export default class Controls {
       this.player.sprite.flipRight()
     }
   }
+
+  registerMap = map => (this.map = map)
 
   /* -------------------------------------------------------------------------- */
   /*                                   GETTERS                                  */

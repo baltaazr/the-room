@@ -13,6 +13,9 @@ class Game {
       this.player = new Player(p)
       this.map = new Map(p, this.player)
       this.enemy = new Enemy()
+
+      this.player.registerMap(this.map)
+
       this.debug = new Debug(this.player, this.map)
 
       p.preload = () => {
