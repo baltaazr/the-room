@@ -1,4 +1,8 @@
-const SPOTLIGHT_SIZE = 'transparent 40px, rgba(0, 0, 0) 70px)'
+import Config from 'config'
+
+const LIGHT_FAR = Config.game.player.light.far
+const LIGHT_NEAR = Config.game.player.light.near
+const SPOTLIGHT_SIZE = `transparent ${LIGHT_NEAR}px, rgba(0, 0, 0) ${LIGHT_FAR}px)`
 
 function Spotlight(player) {
   const spotlight = document.getElementById('spotlight')
