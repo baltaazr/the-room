@@ -67,9 +67,7 @@ export default class Controls {
         this.globalPos.y -= VERT_DELTA
       }
 
-      if (this.windowPos.y - VERT_DELTA < VIEWPORT_PADDING) {
-        console.log('gotta move canvas')
-      } else {
+      if (this.windowPos.y - VERT_DELTA >= VIEWPORT_PADDING) {
         this.windowPos.y -= VERT_DELTA
       }
     }
@@ -94,9 +92,7 @@ export default class Controls {
         this.globalPos.y += VERT_DELTA
       }
 
-      if (this.windowPos.y + VERT_DELTA > this.p.height - VIEWPORT_PADDING) {
-        console.log('gotta move canvas')
-      } else {
+      if (this.windowPos.y + VERT_DELTA <= this.p.height - VIEWPORT_PADDING) {
         this.windowPos.y += VERT_DELTA
       }
     }
@@ -121,9 +117,7 @@ export default class Controls {
         this.globalPos.x -= HORZ_DELTA
       }
 
-      if (this.windowPos.x - HORZ_DELTA < VIEWPORT_PADDING) {
-        console.log('gotta move canvas')
-      } else {
+      if (this.windowPos.x - HORZ_DELTA >= VIEWPORT_PADDING) {
         this.windowPos.x -= HORZ_DELTA
       }
 
@@ -150,9 +144,7 @@ export default class Controls {
         this.globalPos.x += HORZ_DELTA
       }
 
-      if (this.windowPos.x + HORZ_DELTA > this.p.width - VIEWPORT_PADDING) {
-        console.log('gotta move canvas')
-      } else {
+      if (this.windowPos.x + HORZ_DELTA <= this.p.width - VIEWPORT_PADDING) {
         this.windowPos.x += HORZ_DELTA
       }
 
