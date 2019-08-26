@@ -20,10 +20,10 @@ class Map {
 
   initiateRooms = () => {
     const paths = [
-      [0, 1, this.startingRoom, 'south'],
-      [1, 0, this.startingRoom, 'west'],
-      [0, -1, this.startingRoom, 'north'],
-      [-1, 0, this.startingRoom, 'south']
+      [0, 1, this.startingRoom, 'top'],
+      [1, 0, this.startingRoom, 'left'],
+      [0, -1, this.startingRoom, 'bottom'],
+      [-1, 0, this.startingRoom, 'right']
     ]
     const roomsStrings = ['0,0']
     const rooms = [this.startingRoom]
@@ -63,28 +63,28 @@ class Map {
   }
 
   update = () => {
-    this.sprite.draw()
+    this.sprite.draw(this.rooms)
   }
 
   getSurroundings = room => {
     return [
-      [room.x, room.y + 1, room, 'south'],
-      [room.x + 1, room.y, room, 'west'],
-      [room.x, room.y - 1, room, 'north'],
-      [room.x - 1, room.y, room, 'east']
+      [room.x, room.y + 1, room, 'top'],
+      [room.x + 1, room.y, room, 'left'],
+      [room.x, room.y - 1, room, 'bottom'],
+      [room.x - 1, room.y, room, 'right']
     ]
   }
 
   getOppositeDir = dir => {
     switch (dir) {
-      case 'south':
-        return 'north'
-      case 'west':
-        return 'east'
-      case 'north':
-        return 'south'
-      case 'east':
-        return 'west'
+      case 'bottom':
+        return 'top'
+      case 'left':
+        return 'right'
+      case 'top':
+        return 'bottom'
+      case 'right':
+        return 'left'
       default:
         return ''
     }

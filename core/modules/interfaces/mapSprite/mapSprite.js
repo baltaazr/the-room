@@ -27,18 +27,25 @@ class MapSprite {
     })
   }
 
-  draw = () => {
-    /* -------------------------------------------------------------------------- */
-    /*                              DRAW PLAYER HERE                              */
-    /* -------------------------------------------------------------------------- */
+  draw = map => {
     this.p.push()
     this.p.rectMode(this.p.CENTER)
+
     this.p.fill('#eae7af')
-    this.drawRoom({ top: true, bottom: true, left: true, right: true }, 0, 0)
-    this.drawRoom({ top: true, bottom: true, left: true, right: true }, -1, 0)
-    this.drawRoom({ top: true, bottom: true, left: true, right: true }, 1, 0)
-    this.drawRoom({ top: true, bottom: true, left: true, right: true }, 0, 1)
-    this.drawRoom({ top: true, bottom: true, left: true, right: true }, 0, -1)
+    Object.keys(map).forEach(roomCoords => {
+      const coords = roomCoords.split(',')
+      const room = map[roomCoords]
+      this.drawRoom(
+        {
+          top: room.top,
+          bottom: room.bottom,
+          left: room.left,
+          right: room.right
+        },
+        coords[0],
+        coords[1]
+      )
+    })
     this.p.pop()
   }
 
@@ -261,10 +268,6 @@ class MapSprite {
       }
     }
   }
-
-  flipLeft = () => (this.isFlipped = true)
-
-  flipRight = () => (this.isFlipped = false)
 }
 
 export default MapSprite
