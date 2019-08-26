@@ -10,7 +10,7 @@ const ROOM_WIDTH = Config.game.room.width
 const ROOM_HEIGHT = Config.game.room.height
 const ROOM_RADIUS = Config.game.room.radius
 
-class WallSprite {
+class MapSprite {
   constructor(p) {
     this.p = p
   }
@@ -18,6 +18,7 @@ class WallSprite {
   loadSprite = () => {
     this.p.loadImage(WallTilesImg, img => {
       this.vertWall = img.get(9, 16, 7, 16)
+      this.vertWallT = img.get(9, 32, 7, 16)
       this.horzWall = img.get(16, 0, 16, 16)
       this.horzWallB = img.get(16, 64, 16, 16)
       this.corner = img.get(9, 0, 7, 16)
@@ -36,6 +37,8 @@ class WallSprite {
     this.drawRoom({ top: true, bottom: true, left: true, right: true }, 0, 0)
     this.drawRoom({ top: true, bottom: true, left: true, right: true }, -1, 0)
     this.drawRoom({ top: true, bottom: true, left: true, right: true }, 1, 0)
+    this.drawRoom({ top: true, bottom: true, left: true, right: true }, 0, 1)
+    this.drawRoom({ top: true, bottom: true, left: true, right: true }, 0, -1)
     this.p.pop()
   }
 
@@ -106,6 +109,8 @@ class WallSprite {
           (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
         (c - ROOM_RADIUS) * FLOOR_SIZE + ABSOLUTE_COORDS.y
       )
+
+      // WALLS AND FLOOR
       for (let r = 0; r < ROOM_HEIGHT; r++) {
         if (c === 0) {
           this.p.image(
@@ -129,6 +134,131 @@ class WallSprite {
           (c - ROOM_RADIUS) * FLOOR_SIZE + ABSOLUTE_COORDS.y
         )
       }
+
+      // TUNNELS
+      if (entrances.top) {
+        this.p.image(
+          this.floor,
+          ABSOLUTE_COORDS.x - FLOOR_SIZE,
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.y
+        )
+        this.p.image(
+          this.floor,
+          ABSOLUTE_COORDS.x,
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.y
+        )
+        this.p.image(
+          this.floor,
+          ABSOLUTE_COORDS.x + FLOOR_SIZE,
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.y
+        )
+      }
+      if (entrances.bottom) {
+        this.p.image(
+          this.floor,
+          ABSOLUTE_COORDS.x - FLOOR_SIZE,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.y
+        )
+        this.p.image(
+          this.floor,
+          ABSOLUTE_COORDS.x,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.y
+        )
+        this.p.image(
+          this.floor,
+          ABSOLUTE_COORDS.x + FLOOR_SIZE,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.y
+        )
+        this.p.image(
+          this.vertWallT,
+          -FLOOR_SIZE * 2 +
+            VERT_WALL_SIZE / 2 +
+            (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2 +
+            1 +
+            ABSOLUTE_COORDS.x,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.y
+        )
+        this.p.image(
+          this.vertWallT,
+          FLOOR_SIZE * 2 -
+            VERT_WALL_SIZE / 2 +
+            (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2 -
+            1 +
+            ABSOLUTE_COORDS.x,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.y
+        )
+      }
+
+      if (entrances.left) {
+        this.p.image(
+          this.floor,
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y - FLOOR_SIZE
+        )
+        this.p.image(
+          this.floor,
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y
+        )
+        this.p.image(
+          this.floor,
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y + FLOOR_SIZE
+        )
+        this.p.image(
+          this.horzWall,
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y - HORZ_WALL_SIZE - FLOOR_SIZE
+        )
+        this.p.image(
+          this.horzWallB,
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y + HORZ_WALL_SIZE + FLOOR_SIZE
+        )
+        this.p.image(
+          this.vertWall,
+          ABSOLUTE_COORDS.x -
+            (ROOM_RADIUS + 0.5) * FLOOR_SIZE -
+            VERT_WALL_SIZE / 2 +
+            (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
+          FLOOR_SIZE + ABSOLUTE_COORDS.y + FLOOR_SIZE
+        )
+      }
+      if (entrances.right) {
+        this.p.image(
+          this.floor,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y - FLOOR_SIZE
+        )
+        this.p.image(
+          this.floor,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y
+        )
+        this.p.image(
+          this.floor,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y + FLOOR_SIZE
+        )
+        this.p.image(
+          this.horzWall,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y - HORZ_WALL_SIZE - FLOOR_SIZE
+        )
+        this.p.image(
+          this.horzWallB,
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + ABSOLUTE_COORDS.x,
+          ABSOLUTE_COORDS.y + HORZ_WALL_SIZE + FLOOR_SIZE
+        )
+        this.p.image(
+          this.vertWall,
+          ABSOLUTE_COORDS.x +
+            (ROOM_RADIUS + 0.5) * FLOOR_SIZE +
+            VERT_WALL_SIZE / 2 +
+            (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
+          FLOOR_SIZE + ABSOLUTE_COORDS.y + FLOOR_SIZE
+        )
+      }
     }
   }
 
@@ -137,4 +267,4 @@ class WallSprite {
   flipRight = () => (this.isFlipped = false)
 }
 
-export default WallSprite
+export default MapSprite

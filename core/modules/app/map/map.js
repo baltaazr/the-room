@@ -1,5 +1,5 @@
 import Room from '../room/room'
-import WallSprite from '../../interfaces/wallSprite/wallSprite'
+import MapSprite from '../../interfaces/mapSprite/mapSprite'
 
 import Config from 'config'
 
@@ -13,7 +13,7 @@ class Map {
     this.currentRoom = this.startingRoom
     this.rooms = { '0,0': this.startingRoom }
 
-    this.sprite = new WallSprite(p)
+    this.sprite = new MapSprite(p)
 
     this.initiateRooms()
   }
