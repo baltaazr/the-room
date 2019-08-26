@@ -3,9 +3,12 @@ import Config from 'config'
 const MAP_WIDTH = Config.game.map.width
 const MAP_HEIGHT = Config.game.map.height
 const TOTAL_ROOM_DIMENSION = 176
+const SIDE_WALL_DIMENSION = 66
 
 export default class Helpers {
   static getAscii = c => c.charCodeAt(0)
+
+  static getRoomRep = (x, y) => `${x},${y}`
 
   // GET GLOBAL POSITION FOR A ROOM
   static relativeToGlobal = (x, y) => {
@@ -33,4 +36,47 @@ export default class Helpers {
       y: pWindowY + roomGDeltaYToPlayer
     }
   }
+
+  static mapPlayerToRoomNumber = ({ x, y }) => {
+    const playerX = x - MAP_WIDTH / 2
+    const playerY = y - MAP_HEIGHT / 2
+
+    const roomX = Math.round(playerX / TOTAL_ROOM_DIMENSION)
+    const roomY = Math.round(playerY / TOTAL_ROOM_DIMENSION)
+
+    return { x: roomX, y: roomY }
+  }
+
+  // ROOM X and Y
+  static getRoomBoundaries = (x, y) => {
+    const roomGlobal = Helpers.relativeToGlobal(x, y)
+    return {
+      minX: roomGlobal.x - TOTAL_ROOM_DIMENSION / 2,
+      minY: roomGlobal.y - TOTAL_ROOM_DIMENSION / 2,
+      maxX: roomGlobal.x + TOTAL_ROOM_DIMENSION / 2,
+      maxY: roomGlobal.y + TOTAL_ROOM_DIMENSION / 2
+    }
+  }
+
+  static getHallwayBoundaries = (roomBoundaries, direction) => {
+    switch (direction) {
+      case 'bottom':
+      case 'top':
+        return {
+          minX: roomBoundaries.minX + SIDE_WALL_DIMENSION,
+          maxX: roomBoundaries.maxX - SIDE_WALL_DIMENSION
+        }
+
+      case 'left':
+      case 'right':
+        return {
+          minY: roomBoundaries.minY + SIDE_WALL_DIMENSION,
+          maxY: roomBoundaries.maxY - SIDE_WALL_DIMENSION
+        }
+      default:
+        return undefined
+    }
+  }
+
+  static isBetween = (min, val, max) => min <= val && val <= max
 }

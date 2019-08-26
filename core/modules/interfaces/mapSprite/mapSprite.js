@@ -52,31 +52,14 @@ class MapSprite {
     Object.keys(map).forEach(roomCoords => {
       const coords = roomCoords.split(',')
       const room = map[roomCoords]
-      this.drawRoom(
-        {
-          top: room.top,
-          bottom: room.bottom,
-          left: room.left,
-          right: room.right
-        },
-        coords[0],
-        coords[1],
-        room
-      )
+
+      // NO NEED TO EXTRACT. IT'S PASS BY REFERENCE
+      this.drawRoom(room, coords[0], coords[1])
     })
     this.p.pop()
   }
 
-  /**
-   * entrances: {
-   *  top: bool,
-   *  bottom: bool,
-   *  left: bool,
-   *  right: bool
-   * }
-   */
-
-  drawRoom = (entrances, x, y, room) => {
+  drawRoom = (room, x, y) => {
     if (!this.player.isSetup) return
 
     const GLOBAL_COORDS = Helpers.relativeToGlobal(x, y)
@@ -181,7 +164,7 @@ class MapSprite {
       }
 
       // TUNNELS
-      if (entrances.top) {
+      if (room.top) {
         this.p.image(
           this.floors[room.floorGridTunnels[0][0]],
           WINDOW_COORDS.x - FLOOR_SIZE,
@@ -198,7 +181,7 @@ class MapSprite {
           -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
         )
       }
-      if (entrances.bottom) {
+      if (room.bottom) {
         this.p.image(
           this.floors[room.floorGridTunnels[1][0]],
           WINDOW_COORDS.x - FLOOR_SIZE,
@@ -234,7 +217,7 @@ class MapSprite {
         )
       }
 
-      if (entrances.left) {
+      if (room.left) {
         this.p.image(
           this.floors[room.floorGridTunnels[2][0]],
           -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
@@ -269,7 +252,7 @@ class MapSprite {
           FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE
         )
       }
-      if (entrances.right) {
+      if (room.right) {
         this.p.image(
           this.floors[room.floorGridTunnels[3][0]],
           (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,

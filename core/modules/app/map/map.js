@@ -1,5 +1,6 @@
 import Room from '../room/room'
 import MapSprite from '../../interfaces/mapSprite/mapSprite'
+import Helpers from '../../../utils/helpers'
 
 import Config from 'config'
 
@@ -39,13 +40,17 @@ class Map {
       const newPaths = this.getSurroundings(newRoom)
       for (let n = 0; n < newPaths.length; n++) {
         const newPath = newPaths[n]
-        if (!roomsStrings.includes(`${newPath[0]},${newPath[1]}`)) {
+        if (
+          !roomsStrings.includes(Helpers.getRoomRep(newPath[0], newPath[1]))
+        ) {
           paths.push(newPath)
         }
       }
       rooms.push(newRoom)
-      this.rooms[`${newRoom.x},${newRoom.y}`] = newRoom
-      roomsStrings.push(`${newRoom.x},${newRoom.y}`)
+
+      const newRoomRep = Helpers.getRoomRep(newRoom.x, newRoom.y)
+      this.rooms[newRoomRep] = newRoom
+      roomsStrings.push(newRoomRep)
     }
 
     const endingRooms = []
@@ -72,6 +77,8 @@ class Map {
     this.sprite.draw(this.rooms)
   }
 
+  isRoomExists = (x, y) => !!this.rooms[Helpers.getRoomRep(x, y)]
+
   getSurroundings = room => {
     return [
       [room.x, room.y + 1, room, 'top'],
@@ -95,6 +102,8 @@ class Map {
         return ''
     }
   }
+
+  getRoomByCoords = (x, y) => this.rooms[Helpers.getRoomRep(x, y)]
 }
 
 export default Map

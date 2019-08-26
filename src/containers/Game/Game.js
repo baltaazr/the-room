@@ -14,6 +14,12 @@ const Wrapper = styled.div`
   background: ${color};
 `
 
+const DebugWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+`
+
 const GameWrapper = styled.div`
   position: relative;
 `
@@ -33,6 +39,7 @@ const Game = () => {
 
   return (
     <Wrapper>
+      <DebugWrapper id="debug" />
       <GameWrapper ref={mount} />
     </Wrapper>
   )

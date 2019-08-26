@@ -9,6 +9,12 @@ export default class Player {
     this.sprite = new PlayerSprite(p)
   }
 
+  registerMap = map => {
+    this.map = map
+
+    this.controls.registerMap(map)
+  }
+
   update = () => {
     this.controls.tick()
     this.sprite.draw(...this.controls.getPosData())

@@ -26,6 +26,12 @@ const Config = {
         enemy: 1,
         end: 2
       },
+      padding: {
+        px: 18,
+        nx: 32,
+        py: 32,
+        ny: 16
+      },
       floorSize: 16,
       vertWallSize: 7,
       horzWallSize: 16,
