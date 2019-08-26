@@ -23,11 +23,14 @@ const Config = {
       radius: 4,
       gridVals: {
         empty: 0,
-        enemy: 1
+        enemy: 1,
+        end: 2
       },
       floorSize: 16,
       vertWallSize: 7,
-      horzWallSize: 16
+      horzWallSize: 16,
+      endWidth: 14,
+      endHeight: 15
     }
   }
 }

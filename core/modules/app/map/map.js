@@ -55,7 +55,11 @@ class Map {
       }
     }
 
-    endingRooms[Math.floor(Math.random() * endingRooms.length)].trueEnd = true
+    endingRooms[Math.floor(Math.random() * endingRooms.length)].updateGrid(
+      0,
+      0,
+      2
+    )
   }
 
   move = dir => {
