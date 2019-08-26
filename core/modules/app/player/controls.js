@@ -52,7 +52,17 @@ export default class Controls {
         this.globalPos.y - VERT_DELTA <
         roomBoundaries.minY + ROOM_BORDER_PADDING_NY
       ) {
-        console.log('got to border')
+        if (currRoom.top) {
+          const hallwayBoundaries = Helpers.getHallwayBoundaries(
+            roomBoundaries,
+            'top'
+          )
+          if (hallwayBoundaries) {
+            const { minX, maxX } = hallwayBoundaries
+            if (Helpers.isBetween(minX, this.globalPos.x, maxX))
+              this.globalPos.y -= VERT_DELTA
+          }
+        }
       } else {
         this.globalPos.y -= VERT_DELTA
       }
@@ -69,7 +79,17 @@ export default class Controls {
         this.globalPos.y - VERT_DELTA >
         roomBoundaries.maxY - ROOM_BORDER_PADDING_PY
       ) {
-        console.log('got to border')
+        if (currRoom.bottom) {
+          const hallwayBoundaries = Helpers.getHallwayBoundaries(
+            roomBoundaries,
+            'bottom'
+          )
+          if (hallwayBoundaries) {
+            const { minX, maxX } = hallwayBoundaries
+            if (Helpers.isBetween(minX, this.globalPos.x, maxX))
+              this.globalPos.y += VERT_DELTA
+          }
+        }
       } else {
         this.globalPos.y += VERT_DELTA
       }
@@ -86,7 +106,17 @@ export default class Controls {
         this.globalPos.x - HORZ_DELTA <
         roomBoundaries.minX + ROOM_BORDER_PADDING_NX
       ) {
-        console.log('got to border')
+        if (currRoom.left) {
+          const hallwayBoundaries = Helpers.getHallwayBoundaries(
+            roomBoundaries,
+            'left'
+          )
+          if (hallwayBoundaries) {
+            const { minY, maxY } = hallwayBoundaries
+            if (Helpers.isBetween(minY, this.globalPos.y, maxY))
+              this.globalPos.x -= HORZ_DELTA
+          }
+        }
       } else {
         this.globalPos.x -= HORZ_DELTA
       }
@@ -105,7 +135,17 @@ export default class Controls {
         this.globalPos.x + HORZ_DELTA >
         roomBoundaries.maxX - ROOM_BORDER_PADDING_PX
       ) {
-        console.log('got to border')
+        if (currRoom.right) {
+          const hallwayBoundaries = Helpers.getHallwayBoundaries(
+            roomBoundaries,
+            'right'
+          )
+          if (hallwayBoundaries) {
+            const { minY, maxY } = hallwayBoundaries
+            if (Helpers.isBetween(minY, this.globalPos.y, maxY))
+              this.globalPos.x += HORZ_DELTA
+          }
+        }
       } else {
         this.globalPos.x += HORZ_DELTA
       }

@@ -3,6 +3,7 @@ import Config from 'config'
 const MAP_WIDTH = Config.game.map.width
 const MAP_HEIGHT = Config.game.map.height
 const TOTAL_ROOM_DIMENSION = 176
+const SIDE_WALL_DIMENSION = 66
 
 export default class Helpers {
   static getAscii = c => c.charCodeAt(0)
@@ -56,4 +57,26 @@ export default class Helpers {
       maxY: roomGlobal.y + TOTAL_ROOM_DIMENSION / 2
     }
   }
+
+  static getHallwayBoundaries = (roomBoundaries, direction) => {
+    switch (direction) {
+      case 'bottom':
+      case 'top':
+        return {
+          minX: roomBoundaries.minX + SIDE_WALL_DIMENSION,
+          maxX: roomBoundaries.maxX - SIDE_WALL_DIMENSION
+        }
+
+      case 'left':
+      case 'right':
+        return {
+          minY: roomBoundaries.minY + SIDE_WALL_DIMENSION,
+          maxY: roomBoundaries.maxY - SIDE_WALL_DIMENSION
+        }
+      default:
+        return undefined
+    }
+  }
+
+  static isBetween = (min, val, max) => min <= val && val <= max
 }
