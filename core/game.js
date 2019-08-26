@@ -1,16 +1,13 @@
 import { Player, Map, Enemy } from './modules/app'
 import Debug from './modules/interfaces/debug/debug'
+import Spotlight from './modules/interfaces/spotlight/spotlight'
 
 import Config from 'config'
 import p5 from 'p5'
 
-<<<<<<< HEAD
 const FLOOR_SIZE = Config.game.room.floorSize
 const MAP_WIDTH = Config.game.map.width
 const MAP_HEIGHT = Config.game.map.height
-=======
-const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
->>>>>>> 32e95c8f8a27762ea11a0fd73bd383109863120b
 
 class Game {
   constructor(container) {
@@ -22,6 +19,7 @@ class Game {
       this.player.registerMap(this.map)
 
       this.debug = new Debug(this.player, this.map)
+      this.spotlight = new Spotlight(this.player)
 
       p.preload = () => {
         this.map.sprite.loadSprite()
@@ -35,6 +33,8 @@ class Game {
         p.textFont('Helvetica')
         p.textAlign(p.CENTER, p.CENTER)
         p.smooth()
+
+        p.pixelDensity(1)
       }
 
       p.draw = () => {
@@ -43,6 +43,7 @@ class Game {
       }
     }
     this.initiateEnemyMovement()
+
     // eslint-disable-next-line new-cap
     this.p5instance = new p5(this.sketch)
   }
@@ -50,13 +51,13 @@ class Game {
   update = () => {
     this.map.update()
     this.player.update()
+    this.spotlight.update()
     this.debug.update()
   }
 
   enemyMove = () => {
     this.enemy.move(this.player)
   }
-<<<<<<< HEAD
 
   playerMove = () => {
     if (
@@ -80,13 +81,10 @@ class Game {
   }
 
   initiateEnemyMovement = () => {
-    setTimeout(() => {
+    setInterval(() => {
       this.enemyMove()
-      this.initiateEnemyMovement()
     }, 1000)
   }
-=======
->>>>>>> 32e95c8f8a27762ea11a0fd73bd383109863120b
 }
 
 export default Game

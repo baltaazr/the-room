@@ -118,49 +118,6 @@ class MapSprite {
         (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
       )
 
-      // WALLS AND FLOOR
-      for (let r = 0; r < ROOM_HEIGHT; r++) {
-        if (c === 0) {
-          this.p.image(
-            this.horzWall,
-            (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
-            WINDOW_COORDS.y -
-              (ROOM_RADIUS + 0.5) * FLOOR_SIZE -
-              HORZ_WALL_SIZE / 2
-          )
-          this.p.image(
-            this.horzWallB,
-            (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
-            WINDOW_COORDS.y +
-              (ROOM_RADIUS + 0.5) * FLOOR_SIZE +
-              HORZ_WALL_SIZE / 2
-          )
-        }
-        this.p.image(
-          this.floors[room.floorGrid[r][c]],
-          (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
-          (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
-        )
-        switch (room.getVal(c - ROOM_RADIUS, r - ROOM_RADIUS)) {
-          case ENEMY_GRID_VAL:
-            this.p.circle(
-              (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
-              (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y,
-              10
-            )
-            break
-          case 2:
-            this.p.image(
-              this.end,
-              (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
-              (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
-            )
-            break
-          default:
-            break
-        }
-      }
-
       // TUNNELS
       if (room.top) {
         this.p.image(
@@ -319,6 +276,49 @@ class MapSprite {
               WINDOW_COORDS.y + FLOOR_SIZE * i
             )
           }
+        }
+      }
+
+      // WALLS AND FLOOR
+      for (let r = 0; r < ROOM_HEIGHT; r++) {
+        if (c === 0) {
+          this.p.image(
+            this.horzWall,
+            (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
+            WINDOW_COORDS.y -
+              (ROOM_RADIUS + 0.5) * FLOOR_SIZE -
+              HORZ_WALL_SIZE / 2
+          )
+          this.p.image(
+            this.horzWallB,
+            (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
+            WINDOW_COORDS.y +
+              (ROOM_RADIUS + 0.5) * FLOOR_SIZE +
+              HORZ_WALL_SIZE / 2
+          )
+        }
+        this.p.image(
+          this.floors[room.floorGrid[r][c]],
+          (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
+          (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
+        )
+        switch (room.getVal(c - ROOM_RADIUS, r - ROOM_RADIUS)) {
+          case ENEMY_GRID_VAL:
+            this.p.circle(
+              (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
+              (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y,
+              10
+            )
+            break
+          case 2:
+            this.p.image(
+              this.end,
+              (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
+              (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
+            )
+            break
+          default:
+            break
         }
       }
     }
