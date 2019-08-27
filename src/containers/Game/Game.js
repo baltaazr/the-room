@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import TheRoom from 'core/game'
+import { withRouter } from 'react-router-dom'
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,6 +36,8 @@ const GameOverWrapper = styled.div`
   z-index: 10;
   top: 50%;
   left: 50%;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
   border: 10px solid #160f30;
   border-radius: 5px;
@@ -43,6 +46,18 @@ const GameOverWrapper = styled.div`
   font-size: 50px;
   transform: translate(-50%, -50%);
   transition: 1s ease all;
+`
+
+const HomeButton = styled.button`
+  width: 50px;
+  height: 25px;
+  margin: 5px;
+  border: 1px solid #eae7af;
+  border-radius: 5px;
+  background: transparent;
+  color: #eae7af;
+  font-size: 16px;
+  font-weight: 100;
 `
 
 const LevelWrapper = styled.div`
@@ -60,22 +75,33 @@ const GameWrapper = styled.div`
     25;
 `
 
-const Game = () => {
+const Game = ({ history }) => {
   const mount = useRef(null)
 
   useEffect(() => {
     document.title = 'The Room'
 
+    // eslint-disable-next-line no-unused-vars
     const game = new TheRoom(mount.current)
 
-    return () => {
-      game.terminate()
-    }
+    // return () => {
+    //   game.terminate()
+    // }
   }, [mount])
 
   return (
     <Wrapper>
-      <GameOverWrapper id="gameover">GAME OVER</GameOverWrapper>
+      <GameOverWrapper id="gameover">
+        GAME OVER
+        <HomeButton
+          onClick={() => {
+            history.push('/home')
+            window.location.reload()
+          }}
+        >
+          Home
+        </HomeButton>
+      </GameOverWrapper>
       <DebugWrapper id="debug" />
       <LevelWrapper id="score">Level 1</LevelWrapper>
       <GameWrapper ref={mount}>
@@ -85,4 +111,4 @@ const Game = () => {
   )
 }
 
-export default Game
+export default withRouter(Game)

@@ -131,7 +131,7 @@ class Game {
     ) {
       gridVal = room.getValTunnels(1, roomCoords.x + 1)
     }
-    console.log(room.x, room.y, roomCoords, gridVal, room.getVal(-4, 4))
+
     return gridVal === ENEMY_GRID_VAL
   }
 
@@ -150,14 +150,14 @@ class Game {
   }
 
   gameOver = () => {
-    const gameover = document.getElementById('gamemover')
-    if (gameover) gameover.style.display = 'block'
+    const gameover = document.getElementById('gameover')
+    if (gameover) gameover.style.display = 'flex'
   }
 
   initiateEnemyMovement = () => {
     setInterval(() => {
       this.enemyMove()
-    }, 1000)
+    }, 500)
   }
 }
 

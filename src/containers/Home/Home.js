@@ -37,7 +37,13 @@ function Home({ history }) {
   return (
     <Wrapper>
       <AppLogo src={logo} alt="logo" />
-      <StartButton onClick={() => history.push('/game')}>START</StartButton>
+      <StartButton
+        onClick={() => {
+          history.push('/game')
+        }}
+      >
+        START
+      </StartButton>
     </Wrapper>
   )
 }
