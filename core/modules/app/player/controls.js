@@ -158,6 +158,10 @@ export default class Controls {
 
       this.player.sprite.flipRight()
     }
+
+    if (!UP_PRESSED && !DOWN_PRESSED && !LEFT_PRESSED && !RIGHT_PRESSED)
+      this.player.isIdle = true
+    else this.player.isIdle = false
   }
 
   registerMap = map => (this.map = map)

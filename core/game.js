@@ -1,5 +1,6 @@
 import { Player, Map, Enemy } from './modules/app'
 import Debug from './modules/interfaces/debug/debug'
+import Spotlight from './modules/interfaces/spotlight/spotlight'
 
 import Config from 'config'
 import p5 from 'p5'
@@ -18,6 +19,7 @@ class Game {
       this.player.registerMap(this.map)
 
       this.debug = new Debug(this.player, this.map)
+      this.spotlight = new Spotlight(this.player)
 
       p.preload = () => {
         this.map.sprite.loadSprite()
@@ -30,6 +32,9 @@ class Game {
 
         p.textFont('Helvetica')
         p.textAlign(p.CENTER, p.CENTER)
+        p.smooth()
+
+        p.pixelDensity(1)
       }
 
       p.draw = () => {
@@ -38,6 +43,7 @@ class Game {
       }
     }
     this.initiateEnemyMovement()
+
     // eslint-disable-next-line new-cap
     this.p5instance = new p5(this.sketch)
   }
@@ -45,6 +51,7 @@ class Game {
   update = () => {
     this.map.update()
     this.player.update()
+    this.spotlight.update()
     this.debug.update()
   }
 
@@ -74,9 +81,8 @@ class Game {
   }
 
   initiateEnemyMovement = () => {
-    setTimeout(() => {
+    setInterval(() => {
       this.enemyMove()
-      this.initiateEnemyMovement()
     }, 1000)
   }
 }

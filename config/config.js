@@ -11,6 +11,10 @@ const Config = {
       acc: {
         vertical: 5,
         horizontal: 5
+      },
+      light: {
+        far: 100, // px
+        near: 40
       }
     },
     map: {

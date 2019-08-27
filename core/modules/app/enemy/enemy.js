@@ -38,41 +38,42 @@ class Enemy {
     }
 
     if (newPosition.y === -ROOM_RADIUS - 1) {
-      this.room.updateTunnels(0, newPosition.x, ENEMY_GRID_VAL)
+      this.room.updateTunnels(0, newPosition.x + 1, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
     } else if (newPosition.y === ROOM_RADIUS + 1) {
-      this.room.updateTunnels(1, newPosition.x, ENEMY_GRID_VAL)
+      this.room.updateTunnels(1, newPosition.x + 1, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
     } else if (newPosition.x === -ROOM_RADIUS - 1) {
-      this.room.updateTunnels(2, newPosition.y, ENEMY_GRID_VAL)
+      this.room.updateTunnels(2, newPosition.y + 1, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
     } else if (newPosition.x === ROOM_RADIUS + 1) {
-      this.room.updateTunnels(3, newPosition.y, ENEMY_GRID_VAL)
+      this.room.updateTunnels(3, newPosition.y + 1, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
     } else if (newPosition.y < -ROOM_RADIUS - 1) {
       this.room = this.room.top
-      this.room.updateTunnels(1, newPosition.x, ENEMY_GRID_VAL)
+      this.room.updateTunnels(1, newPosition.x + 1, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
       this.roomCoords.y = ROOM_RADIUS + 1
     } else if (newPosition.y > ROOM_RADIUS + 1) {
       this.room = this.room.bottom
-      this.room.updateTunnels(0, newPosition.x, ENEMY_GRID_VAL)
+      this.room.updateTunnels(0, newPosition.x + 1, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
       this.roomCoords.y = -ROOM_RADIUS - 1
     } else if (newPosition.x < -ROOM_RADIUS - 1) {
       this.room = this.room.left
-      this.room.updateTunnels(3, newPosition.y, ENEMY_GRID_VAL)
+      this.room.updateTunnels(3, newPosition.y + 1, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
-      this.roomCoords.y = ROOM_RADIUS + 1
+      this.roomCoords.x = ROOM_RADIUS + 1
     } else if (newPosition.x > ROOM_RADIUS + 1) {
       this.room = this.room.right
-      this.room.updateTunnels(2, newPosition.y, ENEMY_GRID_VAL)
+      this.room.updateTunnels(2, newPosition.y + 1, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
-      this.roomCoords.y = -ROOM_RADIUS - 1
+      this.roomCoords.x = -ROOM_RADIUS - 1
     } else {
       this.room.updateGrid(newPosition.x, newPosition.y, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
     }
+    console.log(this.room.x, this.room.y, this.roomCoords)
   }
 
   getSurroundings = coords => {

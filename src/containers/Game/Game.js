@@ -20,6 +20,17 @@ const DebugWrapper = styled.div`
   left: 0;
 `
 
+const SpotlightWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle,
+    transparent 160px,
+    rgba(0, 0, 0) 200px
+  );
+`
+
 const GameWrapper = styled.div`
   position: relative;
 `
@@ -40,7 +51,9 @@ const Game = () => {
   return (
     <Wrapper>
       <DebugWrapper id="debug" />
-      <GameWrapper ref={mount} />
+      <GameWrapper ref={mount}>
+        <SpotlightWrapper id="spotlight" />
+      </GameWrapper>
     </Wrapper>
   )
 }
