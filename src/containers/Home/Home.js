@@ -1,5 +1,4 @@
-import logo from '../../assets/logo.png'
-
+import logo from 'assets/gui/logo.png'
 import React from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
@@ -24,10 +23,14 @@ const StartButton = styled.button`
   margin: 1em 1em;
   padding: 0.25em 1em;
   border: 2px solid white;
-  border-radius: 3px;
+  border-radius: 10px;
   background: transparent;
   color: white;
   font-size: 200%;
+
+  &:active {
+    outline: none;
+  }
 `
 
 function Home({ history }) {

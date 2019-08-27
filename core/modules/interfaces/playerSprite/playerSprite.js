@@ -1,5 +1,5 @@
-import PlayerWalkImg from '../../../assets/Owlet_Monster_Walk_6.png'
-import PlayerIdleImg from '../../../assets/Owlet_Monster_Idle_4.png'
+import PlayerWalkImg from 'assets/sprites/Owlet_Monster_Walk_6.png'
+import PlayerIdleImg from 'assets/sprites/Owlet_Monster_Idle_4.png'
 
 // change every 5 frames
 const SPRITE_CHANGE_IDLE_FRAME = 5
