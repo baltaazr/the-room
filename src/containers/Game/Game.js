@@ -29,6 +29,22 @@ const SpotlightWrapper = styled.div`
   );
 `
 
+const GameOverWrapper = styled.div`
+  display: none;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  border: 10px solid #160f30;
+  border-radius: 5px;
+  background: #01024e;
+  color: #eae7af;
+  font-size: 50px;
+  transform: translate(-50%, -50%);
+  transition: 1s ease all;
+`
+
 const GameWrapper = styled.div`
   position: relative;
   border: 25px solid #b88846;
@@ -51,6 +67,7 @@ const Game = () => {
 
   return (
     <Wrapper>
+      <GameOverWrapper id="gameover">GAME OVER</GameOverWrapper>
       <DebugWrapper id="debug" />
       <GameWrapper ref={mount}>
         <SpotlightWrapper id="spotlight" />

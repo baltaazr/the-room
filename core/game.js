@@ -146,7 +146,8 @@ class Game {
   }
 
   gameOver = () => {
-    console.log('GAME OVER')
+    const gameover = document.getElementById('gamemover')
+    gameover.style.display = 'block'
   }
 
   initiateEnemyMovement = () => {
