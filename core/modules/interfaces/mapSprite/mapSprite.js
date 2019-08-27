@@ -1,6 +1,6 @@
-import WallTilesImg from '../../../assets/Dungeon_Tileset.png'
 import Helpers from '../../../utils/helpers'
 
+import WallTilesImg from 'assets/sprites/Dungeon_Tileset.png'
 import Config from 'config'
 
 const FLOOR_SIZE = Config.game.room.floorSize

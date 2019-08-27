@@ -22,11 +22,13 @@ module.exports = override(
     path.resolve(__dirname, 'src'),
     path.resolve(__dirname, 'config'),
     path.resolve(__dirname, 'electron'),
-    path.resolve(__dirname, 'core')
+    path.resolve(__dirname, 'core'),
+    path.resolve(__dirname, 'assets')
   ]),
   addWebpackAlias({
     ['electron']: path.resolve(__dirname, 'electron'),
     ['config']: path.resolve(__dirname, 'config'),
-    ['core']: path.resolve(__dirname, 'core')
+    ['core']: path.resolve(__dirname, 'core'),
+    ['assets']: path.resolve(__dirname, 'assets')
   })
 )

@@ -36,7 +36,11 @@
   },
   "settings": {
     "import/resolver": {
-      "alias": [["core", "./core"], ["config", "./config"]]
+      "alias": [
+        ["core", "./core"],
+        ["config", "./config"],
+        ["assets", "./assets"]
+      ]
     }
   }
 }
