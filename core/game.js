@@ -100,6 +100,7 @@ class Game {
       x: Math.round((relativeCoords.x - room.x) * (ROOM_WIDTH + 1)),
       y: Math.round((relativeCoords.y - room.y) * (ROOM_HEIGHT + 1))
     }
+    console.log(room.x, room.y, roomCoords)
     let gridVal = 0
     if (
       Math.abs(roomCoords.x) <= ROOM_RADIUS &&
