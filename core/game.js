@@ -151,7 +151,7 @@ class Game {
 
   gameOver = () => {
     const gameover = document.getElementById('gamemover')
-    gameover.style.display = 'block'
+    if (gameover) gameover.style.display = 'block'
   }
 
   initiateEnemyMovement = () => {
