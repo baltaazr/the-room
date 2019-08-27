@@ -137,9 +137,12 @@ class MapSprite {
         )
         for (let i = -1; i < 2; i++) {
           if (room.getValTunnels(0, i + 1) === ENEMY_GRID_VAL) {
-            this.p.circle(
-              WINDOW_COORDS.x + FLOOR_SIZE * i,
-              -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y,
+            this.p.rect(
+              WINDOW_COORDS.x + FLOOR_SIZE * i + FLOOR_SIZE / 2,
+              -(ROOM_RADIUS + 1) * FLOOR_SIZE +
+                WINDOW_COORDS.y +
+                FLOOR_SIZE / 2,
+              10,
               10
             )
           }
@@ -181,9 +184,10 @@ class MapSprite {
         )
         for (let i = -1; i < 2; i++) {
           if (room.getValTunnels(1, i + 1) === ENEMY_GRID_VAL) {
-            this.p.circle(
-              WINDOW_COORDS.x + FLOOR_SIZE * i,
-              (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y,
+            this.p.rect(
+              WINDOW_COORDS.x + FLOOR_SIZE * i + FLOOR_SIZE / 2,
+              (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
+              10,
               10
             )
           }
@@ -226,9 +230,12 @@ class MapSprite {
         )
         for (let i = -1; i < 2; i++) {
           if (room.getValTunnels(2, i + 1) === ENEMY_GRID_VAL) {
-            this.p.circle(
-              -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-              WINDOW_COORDS.y + FLOOR_SIZE * i,
+            this.p.rect(
+              -(ROOM_RADIUS + 1) * FLOOR_SIZE +
+                WINDOW_COORDS.x +
+                FLOOR_SIZE / 2,
+              WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2,
+              10,
               10
             )
           }
@@ -270,9 +277,10 @@ class MapSprite {
         )
         for (let i = -1; i < 2; i++) {
           if (room.getValTunnels(3, i + 1) === ENEMY_GRID_VAL) {
-            this.p.circle(
-              (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-              WINDOW_COORDS.y + FLOOR_SIZE * i,
+            this.p.rect(
+              (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
+              WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2,
+              10,
               10
             )
           }
@@ -304,9 +312,10 @@ class MapSprite {
         )
         switch (room.getVal(c - ROOM_RADIUS, r - ROOM_RADIUS)) {
           case ENEMY_GRID_VAL:
-            this.p.circle(
-              (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
-              (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y,
+            this.p.rect(
+              (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
+              (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
+              10,
               10
             )
             break

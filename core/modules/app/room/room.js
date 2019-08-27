@@ -17,9 +17,6 @@ class Room {
     this.gridTunnels = new Array(4)
     for (let i = 0; i < 4; i++) {
       this.gridTunnels[i] = new Array(3)
-      for (let n = 0; n < 3; n++) {
-        this.gridTunnels[i][n] = Math.floor(Math.random() * 12)
-      }
     }
 
     this.floorGrid = new Array(ROOM_WIDTH)

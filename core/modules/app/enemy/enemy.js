@@ -10,15 +10,15 @@ const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 class Enemy {
   constructor(room) {
     this.room = room
-    this.roomCoords = { x: 0, y: 0 }
+    this.roomCoords = { x: 4, y: -4 }
   }
 
   move = player => {
     const surroundings = this.getSurroundings(this.roomCoords)
     let dist = this.getDist(
       Helpers.relativeToGlobal(
-        this.room.x + this.roomCoords.x / (ROOM_WIDTH + 2),
-        this.room.y + this.roomCoords.y / (ROOM_HEIGHT + 2)
+        this.room.x + this.roomCoords.x / (ROOM_WIDTH + 1),
+        this.room.y + this.roomCoords.y / (ROOM_HEIGHT + 1)
       ),
       player.controls.globalPos
     )
@@ -26,8 +26,8 @@ class Enemy {
     for (let i = 0; i < surroundings.length; i++) {
       const tempDist = this.getDist(
         Helpers.relativeToGlobal(
-          this.room.x + surroundings[i].x / (ROOM_WIDTH + 2),
-          this.room.y + surroundings[i].y / (ROOM_HEIGHT + 2)
+          this.room.x + surroundings[i].x / (ROOM_WIDTH + 1),
+          this.room.y + surroundings[i].y / (ROOM_HEIGHT + 1)
         ),
         player.controls.globalPos
       )
@@ -73,7 +73,6 @@ class Enemy {
       this.room.updateGrid(newPosition.x, newPosition.y, ENEMY_GRID_VAL)
       this.roomCoords = newPosition
     }
-    console.log(this.room.x, this.room.y, this.roomCoords)
   }
 
   getSurroundings = coords => {

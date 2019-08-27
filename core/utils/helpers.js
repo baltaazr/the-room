@@ -22,6 +22,17 @@ export default class Helpers {
     return { x: CENTER_X + deltaX, y: CENTER_Y + deltaY }
   }
 
+  static globalToRelative = (x, y) => {
+    // 0 should be MAP WIDTH/HEIGHT / 2
+    const CENTER_X = MAP_WIDTH / 2
+    const CENTER_Y = MAP_HEIGHT / 2
+
+    return {
+      x: (x - CENTER_X) / TOTAL_ROOM_DIMENSION,
+      y: (y - CENTER_Y) / TOTAL_ROOM_DIMENSION
+    }
+  }
+
   static mapGlobalToPlayerViewport = (roomGlobalPos, player) => {
     const { x, y } = roomGlobalPos
 

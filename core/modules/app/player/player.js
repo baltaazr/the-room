@@ -3,7 +3,8 @@ import PlayerSprite from '../../interfaces/playerSprite/playerSprite'
 import Controls from './controls'
 
 export default class Player {
-  constructor(p) {
+  constructor(p, playerMove) {
+    this.playerMove = playerMove
     this.controls = new Controls(p, this)
 
     this.sprite = new PlayerSprite(p, this)

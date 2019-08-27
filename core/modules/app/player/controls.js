@@ -162,6 +162,7 @@ export default class Controls {
     if (!UP_PRESSED && !DOWN_PRESSED && !LEFT_PRESSED && !RIGHT_PRESSED)
       this.player.isIdle = true
     else this.player.isIdle = false
+    this.player.playerMove()
   }
 
   registerMap = map => (this.map = map)

@@ -19,7 +19,7 @@ class Map {
 
   initiateRooms = () => {
     this.startingRoom = new Room(0, 0)
-    this.startingRoom.updateGrid(0, 0, ENEMY_GRID_VAL)
+    this.startingRoom.updateGrid(4, -4, ENEMY_GRID_VAL)
     this.rooms = { '0,0': this.startingRoom }
     const paths = [
       [0, 1, this.startingRoom, 'top'],
