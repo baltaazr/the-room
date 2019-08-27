@@ -45,7 +45,7 @@ class Room {
     this.gridTunnels[n][i] = val
   }
 
-  getVal = (x, y) => this.grid[x + ROOM_RADIUS][y + ROOM_RADIUS]
+  getVal = (x, y) => this.grid[y + ROOM_RADIUS][x + ROOM_RADIUS]
 
   getValTunnels = (n, i) => this.gridTunnels[n][i]
 }

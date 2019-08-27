@@ -310,7 +310,7 @@ class MapSprite {
           (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
           (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
         )
-        switch (room.getVal(c - ROOM_RADIUS, r - ROOM_RADIUS)) {
+        switch (room.getVal(r - ROOM_RADIUS, c - ROOM_RADIUS)) {
           case ENEMY_GRID_VAL:
             this.p.rect(
               (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
