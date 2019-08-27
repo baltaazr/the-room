@@ -13,7 +13,7 @@ const Config = {
         horizontal: 5
       },
       light: {
-        far: 500, // px
+        far: 100, // px
         near: 40
       }
     },
