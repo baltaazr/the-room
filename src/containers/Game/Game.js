@@ -45,6 +45,14 @@ const GameOverWrapper = styled.div`
   transition: 1s ease all;
 `
 
+const LevelWrapper = styled.div`
+  margin: 20px;
+  border-bottom: 3px solid #eae7af;
+  color: #eae7af;
+  font-family: 'Lexend Zetta', sans-serif;
+  font-size: 40px;
+`
+
 const GameWrapper = styled.div`
   position: relative;
   border: 25px solid #b88846;
@@ -69,6 +77,7 @@ const Game = () => {
     <Wrapper>
       <GameOverWrapper id="gameover">GAME OVER</GameOverWrapper>
       <DebugWrapper id="debug" />
+      <LevelWrapper id="score">Level 1</LevelWrapper>
       <GameWrapper ref={mount}>
         <SpotlightWrapper id="spotlight" />
       </GameWrapper>

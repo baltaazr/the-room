@@ -1,5 +1,4 @@
 import { Player, Map, Enemy } from './modules/app'
-import Debug from './modules/interfaces/debug/debug'
 import Spotlight from './modules/interfaces/spotlight/spotlight'
 import Helpers from './utils/helpers'
 
@@ -23,7 +22,7 @@ class Game {
 
       this.player.registerMap(this.map)
 
-      this.debug = new Debug(this.player, this.map)
+      // this.debug = new Debug(this.player, this.map)
       this.spotlight = new Spotlight(this.player)
 
       p.preload = () => {
@@ -57,7 +56,7 @@ class Game {
     this.map.update()
     this.player.update()
     this.spotlight.update()
-    this.debug.update()
+    // this.debug.update()
   }
 
   enemyMove = () => {
@@ -143,6 +142,9 @@ class Game {
       y: this.player.controls.p.height / 2
     }
     this.enemy = new Enemy(this.map.startingRoom)
+
+    const level = document.getElementById('score')
+    if (level) level.innerHTML = `Level ${this.map.level}`
   }
 
   gameOver = () => {
