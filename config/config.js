@@ -41,6 +41,22 @@ const Config = {
       floorSize: 16,
       vertWallSize: 7,
       horzWallSize: 16
+    },
+    powerups: {
+      red: {
+        duration: 5000,
+        probability: 0.1,
+        gridVal: 3
+      },
+      blue: {
+        enemySpeed: 1000,
+        duration: 5000,
+        probability: 0.3,
+        gridVal: 4
+      }
+    },
+    enemy: {
+      speed: 500
     }
   }
 }

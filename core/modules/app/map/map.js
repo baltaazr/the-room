@@ -5,6 +5,7 @@ import Helpers from '../../../utils/helpers'
 import Config from 'config'
 
 const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
+const POWERUPS = Config.game.powerups
 
 class Map {
   constructor(p, player) {
@@ -50,6 +51,13 @@ class Map {
       const newRoomRep = Helpers.getRoomRep(newRoom.x, newRoom.y)
       this.rooms[newRoomRep] = newRoom
       roomsStrings.push(newRoomRep)
+
+      Object.keys(POWERUPS).forEach(powerupColor => {
+        const powerup = POWERUPS[powerupColor]
+        if (Math.random() < powerup.probability) {
+          newRoom.generatePowerup(powerup.gridVal)
+        }
+      })
     }
 
     const endingRooms = []

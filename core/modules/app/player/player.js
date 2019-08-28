@@ -8,6 +8,8 @@ export default class Player {
     this.controls = new Controls(p, this)
 
     this.sprite = new PlayerSprite(p, this)
+
+    this.powerups = { red: false, blue: false }
   }
 
   registerMap = map => {
