@@ -13,6 +13,7 @@ const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 const END_GRID_VAL = Config.game.room.gridVals.end
 const RED_POTION_GRID_VAL = Config.game.room.gridVals.redPotion
 const BLUE_POTION_GRID_VAL = Config.game.room.gridVals.bluePotion
+const YELLOW_POTION_GRID_VAL = Config.game.room.gridVals.yellowPotion
 
 class MapSprite {
   constructor(p, player) {
@@ -45,6 +46,7 @@ class MapSprite {
       this.end = img.get(64, 128, 16, 16)
       this.redPotion = img.get(144, 128, 16, 16)
       this.bluePotion = img.get(112, 144, 16, 16)
+      this.yellowPotion = img.get(96, 144, 16, 16)
     })
   }
 
@@ -333,6 +335,9 @@ class MapSprite {
             break
           case BLUE_POTION_GRID_VAL:
             img = this.bluePotion
+            break
+          case YELLOW_POTION_GRID_VAL:
+            img = this.yellowPotion
             break
           default:
             break

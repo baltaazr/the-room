@@ -11,6 +11,7 @@ const ROOM_BORDER_PADDING_PY = Config.game.room.padding.py
 const ROOM_BORDER_PADDING_NX = Config.game.room.padding.nx
 const ROOM_BORDER_PADDING_NY = Config.game.room.padding.ny
 const VIEWPORT_PADDING = Config.game.render.viewportPadding
+const BLUE_POWERUP_SPEED = Config.game.powerups.blue.playerSpeed
 
 export default class Controls {
   constructor(p, player) {
@@ -37,8 +38,10 @@ export default class Controls {
   handleInputAndCollision = () => {
     const deltaFactor = this.p.deltaTime / 50
 
-    const VERT_DELTA = VERT_ACC * deltaFactor
-    const HORZ_DELTA = HORZ_ACC * deltaFactor
+    const VERT_DELTA =
+      (this.player.powerups.blue ? BLUE_POWERUP_SPEED : VERT_ACC) * deltaFactor
+    const HORZ_DELTA =
+      (this.player.powerups.blue ? BLUE_POWERUP_SPEED : HORZ_ACC) * deltaFactor
 
     const UP_PRESSED = this.p.keyIsDown(Helpers.getAscii('W'))
     const DOWN_PRESSED = this.p.keyIsDown(Helpers.getAscii('S'))

@@ -30,7 +30,8 @@ const Config = {
         enemy: 1,
         end: 2,
         redPotion: 3,
-        bluePotion: 4
+        bluePotion: 4,
+        yellowPotion: 5
       },
       padding: {
         px: 16,
@@ -49,10 +50,16 @@ const Config = {
         gridVal: 3
       },
       blue: {
-        enemySpeed: 1000,
+        playerSpeed: 7,
         duration: 5000,
         probability: 0.3,
         gridVal: 4
+      },
+      yellow: {
+        enemySpeed: 1000,
+        duration: 5000,
+        probability: 0.3,
+        gridVal: 5
       }
     },
     enemy: {

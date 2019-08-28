@@ -50,8 +50,8 @@ class Room {
 
   generatePowerup = potionGridVal => {
     this.updateGrid(
-      Math.floor(Math.random() * ROOM_WIDTH - ROOM_RADIUS),
-      Math.floor(Math.random() * ROOM_HEIGHT - ROOM_RADIUS),
+      Math.floor(Math.random() * (ROOM_WIDTH - 2)) - ROOM_RADIUS + 1,
+      Math.floor(Math.random() * (ROOM_HEIGHT - 2)) - ROOM_RADIUS + 1,
       potionGridVal
     )
   }

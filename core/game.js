@@ -14,10 +14,11 @@ const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 const END_GRID_VAL = Config.game.room.gridVals.end
 const RED_POTION_GRID_VAL = Config.game.room.gridVals.redPotion
 const BLUE_POTION_GRID_VAL = Config.game.room.gridVals.bluePotion
+const YELLOW_POTION_GRID_VAL = Config.game.room.gridVals.yellowPotion
 const ENEMY_SPEED = Config.game.enemy.speed
-const RED_POWERUP_DURATION = Config.game.powerups.red.duration
-const BLUE_POWERUP_DURATION = Config.game.powerups.blue.duration
-const BLUE_POWERUP_ENEMY_SPEED = Config.game.powerups.blue.enemySpeed
+const RED_POWERUP = Config.game.powerups.red
+const BLUE_POWERUP = Config.game.powerups.blue
+const YELLOW_POWERUP = Config.game.powerups.yellow
 
 class Game {
   constructor(container) {
@@ -84,6 +85,9 @@ class Game {
         break
       case BLUE_POTION_GRID_VAL:
         this.bluePotionPowerup()
+        break
+      case YELLOW_POTION_GRID_VAL:
+        this.yellowPotionPowerup()
         break
       default:
         break
@@ -178,7 +182,7 @@ class Game {
     setTimeout(() => {
       console.log('RED POWERUP DOWN')
       this.player.powerups.red = false
-    }, RED_POWERUP_DURATION)
+    }, RED_POWERUP.duration)
   }
 
   bluePotionPowerup = () => {
@@ -191,7 +195,20 @@ class Game {
     setTimeout(() => {
       console.log('BLUE POWERUP DOWN')
       this.player.powerups.blue = false
-    }, BLUE_POWERUP_DURATION)
+    }, BLUE_POWERUP.duration)
+  }
+
+  yellowPotionPowerup = () => {
+    const roomNRoomCoords = this.getPlayerRoomNRoomCoords()
+    const room = roomNRoomCoords[0]
+    const roomCoords = roomNRoomCoords[1]
+    room.updateGrid(roomCoords.x, roomCoords.y, 0)
+    this.player.powerups.yellow = true
+    console.log('YELLOW POWERUP UP')
+    setTimeout(() => {
+      console.log('YELLOW POWERUP DOWN')
+      this.player.powerups.yellow = false
+    }, YELLOW_POWERUP.duration)
   }
 
   initiateEnemyMovement = () => {
@@ -200,7 +217,7 @@ class Game {
         this.enemyMove()
         this.initiateEnemyMovement()
       },
-      this.player.powerups.blue ? BLUE_POWERUP_ENEMY_SPEED : ENEMY_SPEED
+      this.player.powerups.yellow ? YELLOW_POWERUP.enemySpeed : ENEMY_SPEED
     )
   }
 }
