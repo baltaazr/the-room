@@ -3,6 +3,8 @@ import Config from 'config'
 const ROOM_WIDTH = Config.game.room.width
 const ROOM_HEIGHT = Config.game.room.height
 const ROOM_RADIUS = Config.game.room.radius
+const RED_POTION_GRID_VAL = Config.game.room.gridVals.redPotion
+const BLUE_POTION_GRID_VAL = Config.game.room.gridVals.bluePotion
 
 class Room {
   constructor(x, y) {
@@ -48,6 +50,15 @@ class Room {
   getVal = (x, y) => this.grid[y + ROOM_RADIUS][x + ROOM_RADIUS]
 
   getValTunnels = (n, i) => this.gridTunnels[n][i]
+
+  generatePowerup = () => {
+    const potionGridVals = [RED_POTION_GRID_VAL, BLUE_POTION_GRID_VAL]
+    this.updateGrid(
+      Math.floor(Math.random() * ROOM_WIDTH - ROOM_RADIUS),
+      Math.floor(Math.random() * ROOM_HEIGHT - ROOM_RADIUS),
+      potionGridVals[Math.floor(Math.random() * potionGridVals.length)]
+    )
+  }
 }
 
 export default Room

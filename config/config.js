@@ -28,7 +28,9 @@ const Config = {
       gridVals: {
         empty: 0,
         enemy: 1,
-        end: 2
+        end: 2,
+        redPotion: 3,
+        bluePotion: 4
       },
       padding: {
         px: 16,

@@ -10,6 +10,9 @@ const ROOM_WIDTH = Config.game.room.width
 const ROOM_HEIGHT = Config.game.room.height
 const ROOM_RADIUS = Config.game.room.radius
 const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
+const END_GRID_VAL = Config.game.room.gridVals.end
+const RED_POTION_GRID_VAL = Config.game.room.gridVals.redPotion
+const BLUE_POTION_GRID_VAL = Config.game.room.gridVals.bluePotion
 
 class MapSprite {
   constructor(p, player) {
@@ -39,7 +42,9 @@ class MapSprite {
         img.get(128, 32, 16, 16),
         img.get(144, 32, 16, 16)
       ]
-      this.end = img.get(65, 130, 14, 12)
+      this.end = img.get(64, 128, 16, 16)
+      this.redPotion = img.get(144, 128, 16, 16)
+      this.bluePotion = img.get(112, 144, 16, 16)
     })
   }
 
@@ -310,6 +315,7 @@ class MapSprite {
           (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
           (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
         )
+        let img = null
         switch (room.getVal(r - ROOM_RADIUS, c - ROOM_RADIUS)) {
           case ENEMY_GRID_VAL:
             this.p.rect(
@@ -319,15 +325,24 @@ class MapSprite {
               10
             )
             break
-          case 2:
-            this.p.image(
-              this.end,
-              (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
-              (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
-            )
+          case END_GRID_VAL:
+            img = this.end
+            break
+          case RED_POTION_GRID_VAL:
+            img = this.redPotion
+            break
+          case BLUE_POTION_GRID_VAL:
+            img = this.bluePotion
             break
           default:
             break
+        }
+        if (img) {
+          this.p.image(
+            img,
+            (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
+            (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
+          )
         }
       }
     }

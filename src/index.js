@@ -12,7 +12,7 @@ const main = (
   </BrowserRouter>
 )
 
-document.getElementById('audio').play()
+// document.getElementById('audio').play()
 
 ReactDOM.render(main, document.getElementById('root'))
 
