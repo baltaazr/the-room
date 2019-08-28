@@ -190,9 +190,15 @@ class Game {
   greenPotionPowerup = () => {
     this.player.powerups.green = true
     console.log('GREEN POWERUP UP')
+
+    clearInterval(this.monsterInterval)
+
+    this.monsterInterval = setInterval(this.enemyMove, GREEN_POWERUP.enemySpeed)
+
     setTimeout(() => {
       console.log('GREEN POWERUP DOWN')
-      this.player.powerups.green = false
+      clearInterval(this.monsterInterval)
+      this.initiateEnemyMovement()
     }, GREEN_POWERUP.duration)
   }
 
@@ -204,17 +210,13 @@ class Game {
   }
 
   initiateEnemyMovement = () => {
-    setTimeout(
-      () => {
-        this.enemyMove()
-        this.initiateEnemyMovement()
-      },
-      this.player.powerups.green ? GREEN_POWERUP.enemySpeed : ENEMY_SPEED
-    )
+    this.monsterInterval = setInterval(this.enemyMove, ENEMY_SPEED)
   }
 
   terminate = () => {
     this.p5instance.remove()
+
+    clearInterval(this.monsterInterval)
   }
 }
 
