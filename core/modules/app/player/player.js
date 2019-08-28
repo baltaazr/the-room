@@ -41,8 +41,8 @@ export default class Player {
       )
     ]
     const roomCoords = {
-      x: Math.round((relativeCoords.x - room.x) * (ROOM_WIDTH + 1)),
-      y: Math.round((relativeCoords.y - room.y) * (ROOM_HEIGHT + 1))
+      x: Math.round((relativeCoords.x - room.x) * (ROOM_WIDTH + 2)),
+      y: Math.round((relativeCoords.y - room.y) * (ROOM_HEIGHT + 2))
     }
     return [room, roomCoords]
   }
