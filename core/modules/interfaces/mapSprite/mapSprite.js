@@ -63,6 +63,7 @@ class MapSprite {
       // NO NEED TO EXTRACT. IT'S PASS BY REFERENCE
       this.drawRoom(room, room.x, room.y)
     })
+
     this.p.pop()
   }
 
@@ -318,6 +319,16 @@ class MapSprite {
         }
       }
     }
+    // TEST
+
+    const roomCoords = this.player.getRoomNRoomCoords()[1]
+
+    this.p.rect(
+      roomCoords.x * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
+      roomCoords.y * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
+      16,
+      16
+    )
   }
 }
 

@@ -103,26 +103,8 @@ class Game {
     }
   }
 
-  getPlayerRoomNRoomCoords = () => {
-    const relativeCoords = Helpers.globalToRelative(
-      this.player.controls.globalPos.x,
-      this.player.controls.globalPos.y
-    )
-    const room = this.map.rooms[
-      Helpers.getRoomRep(
-        Math.round(relativeCoords.x),
-        Math.round(relativeCoords.y)
-      )
-    ]
-    const roomCoords = {
-      x: Math.round((relativeCoords.x - room.x) * (ROOM_WIDTH + 1)),
-      y: Math.round((relativeCoords.y - room.y) * (ROOM_HEIGHT + 1))
-    }
-    return [room, roomCoords]
-  }
-
   checkPlayerPos = () => {
-    const roomNRoomCoords = this.getPlayerRoomNRoomCoords()
+    const roomNRoomCoords = this.player.getRoomNRoomCoords()
     const room = roomNRoomCoords[0]
     const roomCoords = roomNRoomCoords[1]
     let gridVal = 0
@@ -218,7 +200,7 @@ class Game {
   }
 
   powerupConsumed = () => {
-    const roomNRoomCoords = this.getPlayerRoomNRoomCoords()
+    const roomNRoomCoords = this.player.getRoomNRoomCoords()
     const room = roomNRoomCoords[0]
     const roomCoords = roomNRoomCoords[1]
     room.updateGrid(roomCoords.x, roomCoords.y, 0)

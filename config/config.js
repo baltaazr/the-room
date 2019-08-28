@@ -71,7 +71,7 @@ const Config = {
       }
     },
     enemy: {
-      speed: 500
+      speed: 5000
     }
   }
 }
