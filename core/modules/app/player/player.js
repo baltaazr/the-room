@@ -9,7 +9,7 @@ export default class Player {
 
     this.sprite = new PlayerSprite(p, this)
 
-    this.powerups = { red: false, blue: false, yellow: false }
+    this.powerups = { red: false, blue: false, yellow: false, green: false }
   }
 
   registerMap = map => {

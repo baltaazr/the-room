@@ -15,10 +15,12 @@ const END_GRID_VAL = Config.game.room.gridVals.end
 const RED_POTION_GRID_VAL = Config.game.room.gridVals.redPotion
 const BLUE_POTION_GRID_VAL = Config.game.room.gridVals.bluePotion
 const YELLOW_POTION_GRID_VAL = Config.game.room.gridVals.yellowPotion
+const GREEN_POTION_GRID_VAL = Config.game.room.gridVals.greenPotion
 const ENEMY_SPEED = Config.game.enemy.speed
 const RED_POWERUP = Config.game.powerups.red
 const BLUE_POWERUP = Config.game.powerups.blue
 const YELLOW_POWERUP = Config.game.powerups.yellow
+const GREEN_POWERUP = Config.game.powerups.green
 
 class Game {
   constructor(container) {
@@ -81,13 +83,20 @@ class Game {
         this.levelUp()
         break
       case RED_POTION_GRID_VAL:
+        this.powerupConsumed()
         this.redPotionPowerup()
         break
       case BLUE_POTION_GRID_VAL:
+        this.powerupConsumed()
         this.bluePotionPowerup()
         break
       case YELLOW_POTION_GRID_VAL:
+        this.powerupConsumed()
         this.yellowPotionPowerup()
+        break
+      case GREEN_POTION_GRID_VAL:
+        this.powerupConsumed()
+        this.greenPotionPowerup()
         break
       default:
         break
@@ -173,10 +182,6 @@ class Game {
   }
 
   redPotionPowerup = () => {
-    const roomNRoomCoords = this.getPlayerRoomNRoomCoords()
-    const room = roomNRoomCoords[0]
-    const roomCoords = roomNRoomCoords[1]
-    room.updateGrid(roomCoords.x, roomCoords.y, 0)
     this.player.powerups.red = true
     console.log('RED POWERUP UP')
     setTimeout(() => {
@@ -186,10 +191,6 @@ class Game {
   }
 
   bluePotionPowerup = () => {
-    const roomNRoomCoords = this.getPlayerRoomNRoomCoords()
-    const room = roomNRoomCoords[0]
-    const roomCoords = roomNRoomCoords[1]
-    room.updateGrid(roomCoords.x, roomCoords.y, 0)
     this.player.powerups.blue = true
     console.log('BLUE POWERUP UP')
     setTimeout(() => {
@@ -199,10 +200,6 @@ class Game {
   }
 
   yellowPotionPowerup = () => {
-    const roomNRoomCoords = this.getPlayerRoomNRoomCoords()
-    const room = roomNRoomCoords[0]
-    const roomCoords = roomNRoomCoords[1]
-    room.updateGrid(roomCoords.x, roomCoords.y, 0)
     this.player.powerups.yellow = true
     console.log('YELLOW POWERUP UP')
     setTimeout(() => {
@@ -211,13 +208,29 @@ class Game {
     }, YELLOW_POWERUP.duration)
   }
 
+  greenPotionPowerup = () => {
+    this.player.powerups.green = true
+    console.log('GREEN POWERUP UP')
+    setTimeout(() => {
+      console.log('GREEN POWERUP DOWN')
+      this.player.powerups.green = false
+    }, GREEN_POWERUP.duration)
+  }
+
+  powerupConsumed = () => {
+    const roomNRoomCoords = this.getPlayerRoomNRoomCoords()
+    const room = roomNRoomCoords[0]
+    const roomCoords = roomNRoomCoords[1]
+    room.updateGrid(roomCoords.x, roomCoords.y, 0)
+  }
+
   initiateEnemyMovement = () => {
     setTimeout(
       () => {
         this.enemyMove()
         this.initiateEnemyMovement()
       },
-      this.player.powerups.yellow ? YELLOW_POWERUP.enemySpeed : ENEMY_SPEED
+      this.player.powerups.green ? GREEN_POWERUP.enemySpeed : ENEMY_SPEED
     )
   }
 }

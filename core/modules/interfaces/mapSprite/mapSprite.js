@@ -14,6 +14,7 @@ const END_GRID_VAL = Config.game.room.gridVals.end
 const RED_POTION_GRID_VAL = Config.game.room.gridVals.redPotion
 const BLUE_POTION_GRID_VAL = Config.game.room.gridVals.bluePotion
 const YELLOW_POTION_GRID_VAL = Config.game.room.gridVals.yellowPotion
+const GREEN_POTION_GRID_VAL = Config.game.room.gridVals.greenPotion
 
 class MapSprite {
   constructor(p, player) {
@@ -47,6 +48,7 @@ class MapSprite {
       this.redPotion = img.get(144, 128, 16, 16)
       this.bluePotion = img.get(112, 144, 16, 16)
       this.yellowPotion = img.get(96, 144, 16, 16)
+      this.greenPotion = img.get(96, 128, 16, 16)
     })
   }
 
@@ -106,7 +108,7 @@ class MapSprite {
         (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
       WINDOW_COORDS.y + (ROOM_RADIUS + 0.5) * FLOOR_SIZE + HORZ_WALL_SIZE / 2
     )
-
+    // WALLS AND FLOOR
     for (let c = 0; c < ROOM_WIDTH; c++) {
       this.p.image(
         this.vertWall,
@@ -125,176 +127,6 @@ class MapSprite {
         (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
       )
 
-      // TUNNELS
-      if (room.top) {
-        this.p.image(
-          this.floors[room.floorGridTunnels[0][0]],
-          WINDOW_COORDS.x - FLOOR_SIZE,
-          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
-        )
-        this.p.image(
-          this.floors[room.floorGridTunnels[0][1]],
-          WINDOW_COORDS.x,
-          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
-        )
-        this.p.image(
-          this.floors[room.floorGridTunnels[0][2]],
-          WINDOW_COORDS.x + FLOOR_SIZE,
-          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
-        )
-        for (let i = -1; i < 2; i++) {
-          if (room.getValTunnels(0, i + 1) === ENEMY_GRID_VAL) {
-            this.p.rect(
-              WINDOW_COORDS.x + FLOOR_SIZE * i + FLOOR_SIZE / 2,
-              -(ROOM_RADIUS + 1) * FLOOR_SIZE +
-                WINDOW_COORDS.y +
-                FLOOR_SIZE / 2,
-              10,
-              10
-            )
-          }
-        }
-      }
-      if (room.bottom) {
-        this.p.image(
-          this.floors[room.floorGridTunnels[1][0]],
-          WINDOW_COORDS.x - FLOOR_SIZE,
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
-        )
-        this.p.image(
-          this.floors[room.floorGridTunnels[1][1]],
-          WINDOW_COORDS.x,
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
-        )
-        this.p.image(
-          this.floors[room.floorGridTunnels[1][2]],
-          WINDOW_COORDS.x + FLOOR_SIZE,
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
-        )
-        this.p.image(
-          this.vertWallT,
-          -FLOOR_SIZE * 2 +
-            VERT_WALL_SIZE / 2 +
-            (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2 +
-            1 +
-            WINDOW_COORDS.x,
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
-        )
-        this.p.image(
-          this.vertWallT,
-          FLOOR_SIZE * 2 -
-            VERT_WALL_SIZE / 2 +
-            (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2 -
-            1 +
-            WINDOW_COORDS.x,
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
-        )
-        for (let i = -1; i < 2; i++) {
-          if (room.getValTunnels(1, i + 1) === ENEMY_GRID_VAL) {
-            this.p.rect(
-              WINDOW_COORDS.x + FLOOR_SIZE * i + FLOOR_SIZE / 2,
-              (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
-              10,
-              10
-            )
-          }
-        }
-      }
-
-      if (room.left) {
-        this.p.image(
-          this.floors[room.floorGridTunnels[2][0]],
-          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y - FLOOR_SIZE
-        )
-        this.p.image(
-          this.floors[room.floorGridTunnels[2][1]],
-          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y
-        )
-        this.p.image(
-          this.floors[room.floorGridTunnels[2][2]],
-          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y + FLOOR_SIZE
-        )
-        this.p.image(
-          this.horzWall,
-          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y - HORZ_WALL_SIZE - FLOOR_SIZE
-        )
-        this.p.image(
-          this.horzWallB,
-          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y + HORZ_WALL_SIZE + FLOOR_SIZE
-        )
-        this.p.image(
-          this.vertWall,
-          WINDOW_COORDS.x -
-            (ROOM_RADIUS + 0.5) * FLOOR_SIZE -
-            VERT_WALL_SIZE / 2 +
-            (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
-          FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE
-        )
-        for (let i = -1; i < 2; i++) {
-          if (room.getValTunnels(2, i + 1) === ENEMY_GRID_VAL) {
-            this.p.rect(
-              -(ROOM_RADIUS + 1) * FLOOR_SIZE +
-                WINDOW_COORDS.x +
-                FLOOR_SIZE / 2,
-              WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2,
-              10,
-              10
-            )
-          }
-        }
-      }
-      if (room.right) {
-        this.p.image(
-          this.floors[room.floorGridTunnels[3][0]],
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y - FLOOR_SIZE
-        )
-        this.p.image(
-          this.floors[room.floorGridTunnels[3][1]],
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y
-        )
-        this.p.image(
-          this.floors[room.floorGridTunnels[3][2]],
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y + FLOOR_SIZE
-        )
-        this.p.image(
-          this.horzWall,
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y - HORZ_WALL_SIZE - FLOOR_SIZE
-        )
-        this.p.image(
-          this.horzWallB,
-          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
-          WINDOW_COORDS.y + HORZ_WALL_SIZE + FLOOR_SIZE
-        )
-        this.p.image(
-          this.vertWall,
-          WINDOW_COORDS.x +
-            (ROOM_RADIUS + 0.5) * FLOOR_SIZE +
-            VERT_WALL_SIZE / 2 +
-            (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
-          FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE
-        )
-        for (let i = -1; i < 2; i++) {
-          if (room.getValTunnels(3, i + 1) === ENEMY_GRID_VAL) {
-            this.p.rect(
-              (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
-              WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2,
-              10,
-              10
-            )
-          }
-        }
-      }
-
-      // WALLS AND FLOOR
       for (let r = 0; r < ROOM_HEIGHT; r++) {
         if (c === 0) {
           this.p.image(
@@ -339,6 +171,9 @@ class MapSprite {
           case YELLOW_POTION_GRID_VAL:
             img = this.yellowPotion
             break
+          case GREEN_POTION_GRID_VAL:
+            img = this.greenPotion
+            break
           default:
             break
         }
@@ -347,6 +182,138 @@ class MapSprite {
             img,
             (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x,
             (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y
+          )
+        }
+      }
+    }
+    // TUNNELS
+    if (room.top) {
+      for (let n = 0; n < 3; n++) {
+        this.p.image(
+          this.floors[room.floorGridTunnels[0][n]],
+          WINDOW_COORDS.x + FLOOR_SIZE * (n - 1),
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
+        )
+      }
+      for (let i = -1; i < 2; i++) {
+        if (room.getValTunnels(0, i + 1) === ENEMY_GRID_VAL) {
+          this.p.rect(
+            WINDOW_COORDS.x + FLOOR_SIZE * i + FLOOR_SIZE / 2,
+            -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
+            10,
+            10
+          )
+        }
+      }
+    }
+    if (room.bottom) {
+      for (let n = 0; n < 3; n++) {
+        this.p.image(
+          this.floors[room.floorGridTunnels[1][n]],
+          WINDOW_COORDS.x + FLOOR_SIZE * (n - 1),
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
+        )
+      }
+      this.p.image(
+        this.vertWallT,
+        -FLOOR_SIZE * 2 +
+          VERT_WALL_SIZE / 2 +
+          (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2 +
+          1 +
+          WINDOW_COORDS.x,
+        (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
+      )
+      this.p.image(
+        this.vertWallT,
+        FLOOR_SIZE * 2 -
+          VERT_WALL_SIZE / 2 +
+          (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2 -
+          1 +
+          WINDOW_COORDS.x,
+        (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y
+      )
+      for (let i = -1; i < 2; i++) {
+        if (room.getValTunnels(1, i + 1) === ENEMY_GRID_VAL) {
+          this.p.rect(
+            WINDOW_COORDS.x + FLOOR_SIZE * i + FLOOR_SIZE / 2,
+            (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
+            10,
+            10
+          )
+        }
+      }
+    }
+
+    if (room.left) {
+      for (let n = 0; n < 3; n++) {
+        this.p.image(
+          this.floors[room.floorGridTunnels[2][n]],
+          -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
+          WINDOW_COORDS.y + FLOOR_SIZE * (n - 1)
+        )
+      }
+      this.p.image(
+        this.horzWall,
+        -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
+        WINDOW_COORDS.y - HORZ_WALL_SIZE - FLOOR_SIZE
+      )
+      this.p.image(
+        this.horzWallB,
+        -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
+        WINDOW_COORDS.y + HORZ_WALL_SIZE + FLOOR_SIZE
+      )
+      this.p.image(
+        this.vertWall,
+        WINDOW_COORDS.x -
+          (ROOM_RADIUS + 0.5) * FLOOR_SIZE -
+          VERT_WALL_SIZE / 2 +
+          (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
+        FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE
+      )
+      for (let i = -1; i < 2; i++) {
+        if (room.getValTunnels(2, i + 1) === ENEMY_GRID_VAL) {
+          this.p.rect(
+            -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
+            WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2,
+            10,
+            10
+          )
+        }
+      }
+    }
+    if (room.right) {
+      for (let n = 0; n < 3; n++) {
+        this.p.image(
+          this.floors[room.floorGridTunnels[3][n]],
+          (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
+          WINDOW_COORDS.y + FLOOR_SIZE * (n - 1)
+        )
+      }
+      this.p.image(
+        this.horzWall,
+        (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
+        WINDOW_COORDS.y - HORZ_WALL_SIZE - FLOOR_SIZE
+      )
+      this.p.image(
+        this.horzWallB,
+        (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x,
+        WINDOW_COORDS.y + HORZ_WALL_SIZE + FLOOR_SIZE
+      )
+      this.p.image(
+        this.vertWall,
+        WINDOW_COORDS.x +
+          (ROOM_RADIUS + 0.5) * FLOOR_SIZE +
+          VERT_WALL_SIZE / 2 +
+          (HORZ_WALL_SIZE - VERT_WALL_SIZE) / 2,
+        FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE
+      )
+      for (let i = -1; i < 2; i++) {
+        if (room.getValTunnels(3, i + 1) === ENEMY_GRID_VAL) {
+          this.p.rect(
+            (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
+            WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2,
+            10,
+            10
           )
         }
       }

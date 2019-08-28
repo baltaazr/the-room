@@ -31,7 +31,8 @@ const Config = {
         end: 2,
         redPotion: 3,
         bluePotion: 4,
-        yellowPotion: 5
+        yellowPotion: 5,
+        greenPotion: 6
       },
       padding: {
         px: 16,
@@ -46,20 +47,27 @@ const Config = {
     powerups: {
       red: {
         duration: 5000,
-        probability: 0.1,
+        probability: 0.05,
         gridVal: 3
       },
       blue: {
         playerSpeed: 7,
         duration: 5000,
-        probability: 0.3,
+        probability: 0.1,
         gridVal: 4
       },
       yellow: {
+        duration: 5000,
+        probability: 0.1,
+        gridVal: 5,
+        lightFar: 200,
+        lightNear: 80
+      },
+      green: {
         enemySpeed: 1000,
         duration: 5000,
-        probability: 0.3,
-        gridVal: 5
+        probability: 0.1,
+        gridVal: 6
       }
     },
     enemy: {
