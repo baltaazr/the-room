@@ -1,14 +1,11 @@
 import { Player, Map, Enemy } from './modules/app'
 import Spotlight from './modules/interfaces/spotlight/spotlight'
-import Helpers from './utils/helpers'
 
 import Config from 'config'
 import p5 from 'p5'
 
 const MAP_WIDTH = Config.game.map.width
 const MAP_HEIGHT = Config.game.map.height
-const ROOM_WIDTH = Config.game.room.width
-const ROOM_HEIGHT = Config.game.room.height
 const ROOM_RADIUS = Config.game.room.radius
 const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 const END_GRID_VAL = Config.game.room.gridVals.end
@@ -207,13 +204,16 @@ class Game {
   }
 
   initiateEnemyMovement = () => {
-    setTimeout(
-      () => {
-        this.enemyMove()
-        this.initiateEnemyMovement()
-      },
+    this.enemyInterval = setInterval(
+      this.enemyMove,
       this.player.powerups.green ? GREEN_POWERUP.enemySpeed : ENEMY_SPEED
     )
+  }
+
+  terminate = () => {
+    this.p5instance.remove()
+
+    clearInterval(this.enemyInterval)
   }
 }
 

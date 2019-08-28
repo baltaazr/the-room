@@ -1,7 +1,7 @@
 import logo from 'assets/gui/logo.png'
 import React from 'react'
 import styled from 'styled-components'
-import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const color = '#1D1F27'
 
@@ -33,19 +33,15 @@ const StartButton = styled.button`
   }
 `
 
-function Home({ history }) {
+function Home() {
   return (
     <Wrapper>
       <AppLogo src={logo} alt="logo" />
-      <StartButton
-        onClick={() => {
-          history.push('/game')
-        }}
-      >
-        START
-      </StartButton>
+      <Link to="/game">
+        <StartButton>START</StartButton>
+      </Link>
     </Wrapper>
   )
 }
 
-export default withRouter(Home)
+export default Home

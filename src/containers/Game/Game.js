@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import TheRoom from 'core/game'
-import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
   display: flex;
@@ -75,7 +75,7 @@ const GameWrapper = styled.div`
     25;
 `
 
-const Game = ({ history }) => {
+const Game = () => {
   const mount = useRef(null)
 
   useEffect(() => {
@@ -84,23 +84,18 @@ const Game = ({ history }) => {
     // eslint-disable-next-line no-unused-vars
     const game = new TheRoom(mount.current)
 
-    // return () => {
-    //   game.terminate()
-    // }
+    return () => {
+      game.terminate()
+    }
   }, [mount])
 
   return (
     <Wrapper>
       <GameOverWrapper id="gameover">
         GAME OVER
-        <HomeButton
-          onClick={() => {
-            history.push('/home')
-            window.location.reload()
-          }}
-        >
-          Home
-        </HomeButton>
+        <Link to="/home">
+          <HomeButton>Home</HomeButton>
+        </Link>
       </GameOverWrapper>
       <DebugWrapper id="debug" />
       <LevelWrapper id="score">Level 1</LevelWrapper>
@@ -111,4 +106,4 @@ const Game = ({ history }) => {
   )
 }
 
-export default withRouter(Game)
+export default Game

@@ -9,7 +9,6 @@ const Main = () => {
     <Switch>
       <Route path="/home" component={Home} />
       <Route path="/game" component={Game} />
-      <Route path="/home" component={Home} />
       <Route path="/" component={() => <Redirect to="/home" />} />
     </Switch>
   )
