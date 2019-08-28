@@ -92,4 +92,31 @@ export default class Helpers {
 
   static isBetween = (min, val, max, epsilon = 0.1) =>
     min + epsilon <= val && val <= max - epsilon
+
+  static getElementWidth(element) {
+    const styles = getComputedStyle(element)
+
+    return (
+      element.clientWidth -
+      parseFloat(styles.paddingLeft) -
+      parseFloat(styles.paddingRight)
+    )
+  }
+
+  static getElementHeight(element) {
+    const styles = getComputedStyle(element)
+
+    return (
+      element.clientHeight -
+      parseFloat(styles.paddingTop) -
+      parseFloat(styles.paddingBottom)
+    )
+  }
+
+  static generateRandomEnemyPos() {
+    return {
+      x: (Math.random() > 0.5 ? 1 : -1) * (Math.floor(2 * Math.random()) + 3),
+      y: (Math.random() > 0.5 ? 1 : -1) * (Math.floor(2 * Math.random()) + 3)
+    }
+  }
 }

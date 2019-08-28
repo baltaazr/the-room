@@ -45,6 +45,7 @@ class MapSprite {
         img.get(144, 32, 16, 16)
       ]
       this.end = img.get(64, 128, 16, 16)
+      this.bones = img.get(112, 112, 16, 16)
       this.redPotion = img.get(144, 128, 16, 16)
       this.bluePotion = img.get(112, 144, 16, 16)
       this.yellowPotion = img.get(96, 144, 16, 16)
@@ -153,12 +154,7 @@ class MapSprite {
         let img = null
         switch (room.getVal(r - ROOM_RADIUS, c - ROOM_RADIUS)) {
           case ENEMY_GRID_VAL:
-            this.p.rect(
-              (r - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
-              (c - ROOM_RADIUS) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
-              10,
-              10
-            )
+            img = this.bones
             break
           case END_GRID_VAL:
             img = this.end
@@ -198,12 +194,14 @@ class MapSprite {
       }
       for (let i = -1; i < 2; i++) {
         if (room.getValTunnels(0, i + 1) === ENEMY_GRID_VAL) {
-          this.p.rect(
+          this.p.push()
+          this.p.imageMode(this.p.CENTER)
+          this.p.image(
+            this.bones,
             WINDOW_COORDS.x + FLOOR_SIZE * i + FLOOR_SIZE / 2,
-            -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
-            10,
-            10
+            -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2
           )
+          this.p.pop()
         }
       }
     }
@@ -235,12 +233,14 @@ class MapSprite {
       )
       for (let i = -1; i < 2; i++) {
         if (room.getValTunnels(1, i + 1) === ENEMY_GRID_VAL) {
-          this.p.rect(
+          this.p.push()
+          this.p.imageMode(this.p.CENTER)
+          this.p.image(
+            this.bones,
             WINDOW_COORDS.x + FLOOR_SIZE * i + FLOOR_SIZE / 2,
-            (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
-            10,
-            10
+            (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2
           )
+          this.p.pop()
         }
       }
     }
@@ -273,12 +273,14 @@ class MapSprite {
       )
       for (let i = -1; i < 2; i++) {
         if (room.getValTunnels(2, i + 1) === ENEMY_GRID_VAL) {
-          this.p.rect(
+          this.p.push()
+          this.p.imageMode(this.p.CENTER)
+          this.p.image(
+            this.bones,
             -(ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
-            WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2,
-            10,
-            10
+            WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2
           )
+          this.p.pop()
         }
       }
     }
@@ -310,25 +312,27 @@ class MapSprite {
       )
       for (let i = -1; i < 2; i++) {
         if (room.getValTunnels(3, i + 1) === ENEMY_GRID_VAL) {
-          this.p.rect(
+          this.p.push()
+          this.p.imageMode(this.p.CENTER)
+          this.p.image(
+            this.bones,
             (ROOM_RADIUS + 1) * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
-            WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2,
-            10,
-            10
+            WINDOW_COORDS.y + FLOOR_SIZE * i + FLOOR_SIZE / 2
           )
+          this.p.pop()
         }
       }
     }
     // TEST
 
-    const roomCoords = this.player.getRoomNRoomCoords()[1]
+    // const roomCoords = this.player.getRoomNRoomCoords()[1]
 
-    this.p.rect(
-      roomCoords.x * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
-      roomCoords.y * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
-      16,
-      16
-    )
+    // this.p.rect(
+    //   roomCoords.x * FLOOR_SIZE + WINDOW_COORDS.x + FLOOR_SIZE / 2,
+    //   roomCoords.y * FLOOR_SIZE + WINDOW_COORDS.y + FLOOR_SIZE / 2,
+    //   16,
+    //   16
+    // )
   }
 }
 

@@ -1,9 +1,11 @@
 import PlayerWalkImg from 'assets/sprites/Owlet_Monster_Walk_6.png'
 import PlayerIdleImg from 'assets/sprites/Owlet_Monster_Idle_4.png'
+import Config from 'config'
 
 // change every 5 frames
 const SPRITE_CHANGE_IDLE_FRAME = 5
 const SPRITE_CHANGE_WALK_FRAME = 2
+const SPRITE_WIDTH = Config.game.player.sprite.width
 
 class PlayerSprite {
   constructor(p, player) {
@@ -56,7 +58,11 @@ class PlayerSprite {
           ]
 
       this.p.imageMode(this.p.CENTER)
-      this.p.image(sprite, wx * (this.isFlipped ? -1 : 1), wy)
+      this.p.image(
+        sprite,
+        (wx + SPRITE_WIDTH / 4) * (this.isFlipped ? -1 : 1),
+        wy
+      )
     } else this.p.rect(wx, wy, 20, 20)
     this.p.pop()
   }

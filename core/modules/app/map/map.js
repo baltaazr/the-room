@@ -4,7 +4,6 @@ import Helpers from '../../../utils/helpers'
 
 import Config from 'config'
 
-const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 const POWERUPS = Config.game.powerups
 
 class Map {
@@ -19,8 +18,7 @@ class Map {
   }
 
   initiateRooms = () => {
-    this.startingRoom = new Room(0, 0)
-    this.startingRoom.updateGrid(4, -4, ENEMY_GRID_VAL)
+    this.startingRoom = new Room(0, 0, this)
     this.rooms = { '0,0': this.startingRoom }
     const paths = [
       [0, 1, this.startingRoom, 'top'],
@@ -33,7 +31,7 @@ class Map {
     for (let i = 0; i < this.level; i++) {
       const temp = paths.splice(Math.floor(Math.random() * paths.length), 1)[0]
       temp[2].end = false
-      const newRoom = new Room(temp[0], temp[1])
+      const newRoom = new Room(temp[0], temp[1], this)
       // eslint-disable-next-line prefer-destructuring
       newRoom[temp[3]] = temp[2]
       temp[2][this.getOppositeDir(temp[3])] = newRoom

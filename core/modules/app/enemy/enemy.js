@@ -10,7 +10,7 @@ const ENEMY_GRID_VAL = Config.game.room.gridVals.enemy
 class Enemy {
   constructor(room) {
     this.room = room
-    this.roomCoords = { x: 4, y: -4 }
+    this.roomCoords = Helpers.generateRandomEnemyPos()
   }
 
   move = player => {

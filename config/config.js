@@ -15,11 +15,16 @@ const Config = {
       light: {
         far: 100, // px
         near: 40
+      },
+      sprite: {
+        width: 32,
+        height: 32
       }
     },
     map: {
       width: 5000,
-      height: 3000
+      height: 3000,
+      enemyIncrement: 5 // every 4 levels
     },
     room: {
       width: 9,
@@ -42,38 +47,46 @@ const Config = {
       },
       floorSize: 16,
       vertWallSize: 7,
-      horzWallSize: 16
+      horzWallSize: 16,
+      monsterGridTimeoutConstant: 3000, // 1s
+      levelEnemyInterval: 200
     },
     powerups: {
       red: {
         duration: 5000,
-        probability: 0.05,
-        gridVal: 3
+        // probability: 0.05,
+        probability: 1,
+        gridVal: 3,
+        description: 'Invincibility'
       },
       blue: {
         playerSpeed: 7,
         duration: 5000,
         probability: 0.1,
-        gridVal: 4
+        gridVal: 4,
+        description: 'Speed'
       },
       yellow: {
         duration: 5000,
         probability: 0.1,
         gridVal: 5,
         lightFar: 200,
-        lightNear: 80
+        lightNear: 80,
+        description: 'Night Vision'
       },
       green: {
         enemySpeed: 1000,
         duration: 5000,
         probability: 0.5,
-        gridVal: 6
+        gridVal: 6,
+        description: 'Necromancer'
       }
     },
     enemy: {
-      speed: 500
+      speed: 500,
+      levelUpFactor: 0.95
     }
   }
 }
 
-module.exports = Config
+export default Config
