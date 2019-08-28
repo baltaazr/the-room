@@ -66,12 +66,12 @@ const Config = {
       green: {
         enemySpeed: 1000,
         duration: 5000,
-        probability: 0.1,
+        probability: 0.5,
         gridVal: 6
       }
     },
     enemy: {
-      speed: 5000
+      speed: 500
     }
   }
 }

@@ -204,16 +204,17 @@ class Game {
   }
 
   initiateEnemyMovement = () => {
-    this.enemyInterval = setInterval(
-      this.enemyMove,
+    setTimeout(
+      () => {
+        this.enemyMove()
+        this.initiateEnemyMovement()
+      },
       this.player.powerups.green ? GREEN_POWERUP.enemySpeed : ENEMY_SPEED
     )
   }
 
   terminate = () => {
     this.p5instance.remove()
-
-    clearInterval(this.enemyInterval)
   }
 }
 
