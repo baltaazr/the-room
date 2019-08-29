@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/the-room/static/css/main.340c2443.chunk.css",
+    "main.js": "/the-room/static/js/main.0fbf17cd.chunk.js",
+    "main.js.map": "/the-room/static/js/main.0fbf17cd.chunk.js.map",
+    "runtime~main.js": "/the-room/static/js/runtime~main.8897cd81.js",
+    "runtime~main.js.map": "/the-room/static/js/runtime~main.8897cd81.js.map",
+    "static/js/2.7687f5e9.chunk.js": "/the-room/static/js/2.7687f5e9.chunk.js",
+    "static/js/2.7687f5e9.chunk.js.map": "/the-room/static/js/2.7687f5e9.chunk.js.map",
+    "index.html": "/the-room/index.html",
+    "precache-manifest.55c63fb1caf5f98af12658cb19cefe59.js": "/the-room/precache-manifest.55c63fb1caf5f98af12658cb19cefe59.js",
+    "service-worker.js": "/the-room/service-worker.js",
+    "static/css/main.340c2443.chunk.css.map": "/the-room/static/css/main.340c2443.chunk.css.map",
+    "static/media/Dungeon_Tileset.png": "/the-room/static/media/Dungeon_Tileset.d30c4780.png",
+    "static/media/logo.png": "/the-room/static/media/logo.dc65f600.png"
+  }
+}
