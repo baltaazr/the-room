@@ -2,7 +2,7 @@
   "name": "the-room",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "http://balta-z-r.github.io/the-room",
   "main": "electron/main.js",
   "dependencies": {
     "p5": "^0.9.0",
