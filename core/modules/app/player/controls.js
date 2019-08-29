@@ -43,10 +43,18 @@ export default class Controls {
     const HORZ_DELTA =
       (this.player.powerups.blue ? BLUE_POWERUP_SPEED : HORZ_ACC) * deltaFactor
 
-    const UP_PRESSED = this.p.keyIsDown(Helpers.getAscii('W'))
-    const DOWN_PRESSED = this.p.keyIsDown(Helpers.getAscii('S'))
-    const LEFT_PRESSED = this.p.keyIsDown(Helpers.getAscii('A'))
-    const RIGHT_PRESSED = this.p.keyIsDown(Helpers.getAscii('D'))
+    const UP_PRESSED =
+      this.p.keyIsDown(Helpers.getAscii('W')) ||
+      this.p.keyIsDown(this.p.UP_ARROW)
+    const DOWN_PRESSED =
+      this.p.keyIsDown(Helpers.getAscii('S')) ||
+      this.p.keyIsDown(this.p.DOWN_ARROW)
+    const LEFT_PRESSED =
+      this.p.keyIsDown(Helpers.getAscii('A')) ||
+      this.p.keyIsDown(this.p.LEFT_ARROW)
+    const RIGHT_PRESSED =
+      this.p.keyIsDown(Helpers.getAscii('D')) ||
+      this.p.keyIsDown(this.p.RIGHT_ARROW)
 
     const { x, y } = Helpers.mapPlayerToRoomNumber(this.globalPos)
     const currRoom = this.map.getRoomByCoords(x, y)

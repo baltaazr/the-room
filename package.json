@@ -23,6 +23,7 @@
     "electron": "electron .",
     "electron-start": "node scripts/start",
     "react-start": "cross-env BROWSER=none react-app-rewired start",
+    "react": "react-app-rewired start",
     "pack": "build --dir",
     "dist": "yarn run build && build",
     "postinstall": "install-app-deps"
