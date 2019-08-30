@@ -2,8 +2,7 @@
   "name": "the-room",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
-  "main": "electron/main.js",
+  "homepage": "https://balta-z-r.github.io/the-room",
   "dependencies": {
     "p5": "^0.9.0",
     "react": "^16.9.0",
@@ -26,7 +25,8 @@
     "react": "react-app-rewired start",
     "pack": "build --dir",
     "dist": "yarn run build && build",
-    "postinstall": "install-app-deps"
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "husky": {
     "hooks": {
@@ -34,21 +34,12 @@
     }
   },
   "lint-staged": {
-    "{src,electron}/**/*.{js,jsx}": [
+    "{src,electron,core,config}/**/*.{js,jsx}": [
       "eslint --fix",
       "stylelint --config=.stylelintrc --fix",
       "pretty-quick --staged",
       "git add"
     ]
-  },
-  "build": {
-    "appId": "com.electron.electron-with-create-react-app",
-    "win": {
-      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
-    },
-    "directories": {
-      "buildResources": "public"
-    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -76,7 +67,6 @@
     "cross-env": "^5.2.0",
     "customize-cra": "^0.5.0",
     "electron": "^6.0.2",
-    "electron-builder": "^21.2.0",
     "eslint-config-airbnb": "^18.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-import-resolver-alias": "^1.1.2",
@@ -84,6 +74,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "foreman": "^3.0.1",
+    "gh-pages": "^2.1.1",
     "graphql-cli": "^3.0.12",
     "husky": "^3.0.3",
     "lint-staged": "^9.2.1",
