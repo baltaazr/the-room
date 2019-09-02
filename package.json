@@ -2,7 +2,7 @@
   "name": "the-room",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://balta-z-r.github.io/the-room",
+  "homepage": "http://balta-z-r.github.io/the-room",
   "dependencies": {
     "p5": "^0.9.0",
     "react": "^16.9.0",
