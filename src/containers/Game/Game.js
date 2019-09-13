@@ -98,6 +98,10 @@ const Game = () => {
     const bgm = new Audio(DarkFog)
     bgm.play()
 
+    bgm.onended = () => {
+      bgm.currentTime = 0
+    }
+
     // eslint-disable-next-line no-unused-vars
     const game = new TheRoom(mount.current)
 

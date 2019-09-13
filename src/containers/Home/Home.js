@@ -39,6 +39,10 @@ function Home() {
     const bgm = new Audio(TroubleIsBrewing)
     bgm.play()
 
+    bgm.onended = () => {
+      bgm.currentTime = 0
+    }
+
     return () => {
       bgm.pause()
       bgm.currentTime = 0

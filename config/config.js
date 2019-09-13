@@ -54,8 +54,8 @@ const Config = {
     powerups: {
       red: {
         duration: 5000,
-        // probability: 0.05,
-        probability: 1,
+        probability: 0.05,
+        // probability: 1,
         gridVal: 3,
         description: 'Invincibility'
       },
