@@ -40,8 +40,8 @@ const Config = {
         greenPotion: 6
       },
       padding: {
-        px: 16,
-        nx: 30,
+        px: 20,
+        nx: 24,
         py: 28,
         ny: 20
       },

@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import TheRoom from 'core/game'
 import { Link } from 'react-router-dom'
+import DarkFog from 'assets/music/Dark-Fog.mp3'
 
 const Wrapper = styled.div`
   display: flex;
@@ -94,10 +95,15 @@ const Game = () => {
   useEffect(() => {
     document.title = 'The Room'
 
+    const bgm = new Audio(DarkFog)
+    bgm.play()
+
     // eslint-disable-next-line no-unused-vars
     const game = new TheRoom(mount.current)
 
     return () => {
+      bgm.pause()
+      bgm.currentTime = 0
       game.terminate()
     }
   }, [mount])

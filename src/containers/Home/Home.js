@@ -1,7 +1,8 @@
 import logo from 'assets/gui/logo.png'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import TroubleIsBrewing from 'assets/music/Trouble-Is-Brewing.mp3'
 
 const color = '#1D1F27'
 
@@ -34,6 +35,16 @@ const StartButton = styled.button`
 `
 
 function Home() {
+  useEffect(() => {
+    const bgm = new Audio(TroubleIsBrewing)
+    bgm.play()
+
+    return () => {
+      bgm.pause()
+      bgm.currentTime = 0
+    }
+  })
+
   return (
     <Wrapper>
       <AppLogo src={logo} alt="logo" />
