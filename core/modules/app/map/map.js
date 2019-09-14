@@ -38,9 +38,15 @@ class Map {
       const newPaths = this.getSurroundings(newRoom)
       for (let n = 0; n < newPaths.length; n++) {
         const newPath = newPaths[n]
-        if (
-          !roomsStrings.includes(Helpers.getRoomRep(newPath[0], newPath[1]))
-        ) {
+        const tempRoomString = Helpers.getRoomRep(newPath[0], newPath[1])
+        let notRepeat = true
+        for (let a = 0; a < roomsStrings.length; a++) {
+          const roomString = roomsStrings[a]
+          if (roomString === tempRoomString) {
+            notRepeat = false
+          }
+        }
+        if (notRepeat) {
           paths.push(newPath)
         }
       }
@@ -76,6 +82,7 @@ class Map {
       trueEndingRoom.x,
       trueEndingRoom.y
     )
+    console.log(roomsStrings)
   }
 
   update = () => {
