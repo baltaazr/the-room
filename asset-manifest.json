@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/the-room/static/css/main.340c2443.chunk.css",
-    "main.js": "/the-room/static/js/main.8855fbe1.chunk.js",
-    "main.js.map": "/the-room/static/js/main.8855fbe1.chunk.js.map",
+    "main.js": "/the-room/static/js/main.2ba11202.chunk.js",
+    "main.js.map": "/the-room/static/js/main.2ba11202.chunk.js.map",
     "runtime~main.js": "/the-room/static/js/runtime~main.8897cd81.js",
     "runtime~main.js.map": "/the-room/static/js/runtime~main.8897cd81.js.map",
     "static/js/2.9f9ca37a.chunk.js": "/the-room/static/js/2.9f9ca37a.chunk.js",
     "static/js/2.9f9ca37a.chunk.js.map": "/the-room/static/js/2.9f9ca37a.chunk.js.map",
     "index.html": "/the-room/index.html",
-    "precache-manifest.d85ffb0e43d4ea579162859b1b961022.js": "/the-room/precache-manifest.d85ffb0e43d4ea579162859b1b961022.js",
+    "precache-manifest.f1fa75f52f85a88d46731219ffe7a320.js": "/the-room/precache-manifest.f1fa75f52f85a88d46731219ffe7a320.js",
     "service-worker.js": "/the-room/service-worker.js",
     "static/css/main.340c2443.chunk.css.map": "/the-room/static/css/main.340c2443.chunk.css.map",
     "static/media/Dark-Fog.mp3": "/the-room/static/media/Dark-Fog.e45428b9.mp3",
