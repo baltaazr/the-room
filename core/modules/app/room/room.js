@@ -2,6 +2,7 @@ import Config from 'config'
 
 const EMPTY_CELL_VAL = Config.game.room.gridVals.empty
 const ENEMY_CELL_VAL = Config.game.room.gridVals.enemy
+const END_CELL_VAL = Config.game.room.gridVals.end
 const ROOM_WIDTH = Config.game.room.width
 const ROOM_HEIGHT = Config.game.room.height
 const ROOM_RADIUS = Config.game.room.radius
@@ -45,11 +46,13 @@ class Room {
   }
 
   updateGrid = (x, y, val) => {
+    const prevVal = this.grid[y + ROOM_RADIUS][x + ROOM_RADIUS]
     this.grid[y + ROOM_RADIUS][x + ROOM_RADIUS] = val
 
     if (val === ENEMY_CELL_VAL) {
       const timeout = setTimeout(() => {
-        this.grid[y + ROOM_RADIUS][x + ROOM_RADIUS] = EMPTY_CELL_VAL
+        this.grid[y + ROOM_RADIUS][x + ROOM_RADIUS] =
+          prevVal === END_CELL_VAL ? END_CELL_VAL : EMPTY_CELL_VAL
         clearTimeout(timeout)
       }, MONSTER_GRID_TIMEOUT_CONSTANT + this.map.level * LEVEL_ENEMY_INTERVAL)
     }

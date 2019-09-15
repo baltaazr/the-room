@@ -30,31 +30,34 @@ class Map {
     const rooms = [this.startingRoom]
     for (let i = 0; i < this.level; i++) {
       const temp = paths.splice(Math.floor(Math.random() * paths.length), 1)[0]
-      temp[2].end = false
-      const newRoom = new Room(temp[0], temp[1], this)
-      // eslint-disable-next-line prefer-destructuring
-      newRoom[temp[3]] = temp[2]
-      temp[2][this.getOppositeDir(temp[3])] = newRoom
-      const newPaths = this.getSurroundings(newRoom)
-      for (let n = 0; n < newPaths.length; n++) {
-        const newPath = newPaths[n]
-        const tempRoomString = Helpers.getRoomRep(newPath[0], newPath[1])
-        if (!this.rooms[tempRoomString]) {
-          paths.push(newPath)
+      if (!this.rooms[Helpers.getRoomRep(temp[0], temp[1])]) {
+        temp[2].end = false
+        const newRoom = new Room(temp[0], temp[1], this)
+        // eslint-disable-next-line prefer-destructuring
+        newRoom[temp[3]] = temp[2]
+        temp[2][this.getOppositeDir(temp[3])] = newRoom
+        const newPaths = this.getSurroundings(newRoom)
+        for (let n = 0; n < newPaths.length; n++) {
+          const newPath = newPaths[n]
+          if (!this.rooms[Helpers.getRoomRep(newPath[0], newPath[1])]) {
+            paths.push(newPath)
+          }
         }
+        rooms.push(newRoom)
+
+        const newRoomRep = Helpers.getRoomRep(newRoom.x, newRoom.y)
+        this.rooms[newRoomRep] = newRoom
+        roomsStrings.push(newRoomRep)
+
+        Object.keys(POWERUPS).forEach(powerupColor => {
+          const powerup = POWERUPS[powerupColor]
+          if (Math.random() < powerup.probability) {
+            newRoom.generatePowerup(powerup.gridVal)
+          }
+        })
+      } else {
+        i -= 1
       }
-      rooms.push(newRoom)
-
-      const newRoomRep = Helpers.getRoomRep(newRoom.x, newRoom.y)
-      this.rooms[newRoomRep] = newRoom
-      roomsStrings.push(newRoomRep)
-
-      Object.keys(POWERUPS).forEach(powerupColor => {
-        const powerup = POWERUPS[powerupColor]
-        if (Math.random() < powerup.probability) {
-          newRoom.generatePowerup(powerup.gridVal)
-        }
-      })
     }
 
     const endingRooms = []
@@ -75,7 +78,6 @@ class Map {
       trueEndingRoom.x,
       trueEndingRoom.y
     )
-    console.log(roomsStrings)
   }
 
   update = () => {

@@ -13,8 +13,8 @@ const Config = {
         horizontal: 5
       },
       light: {
-        far: 100, // px
-        near: 40
+        far: 10000, // px
+        near: 10000
       },
       sprite: {
         width: 32,
