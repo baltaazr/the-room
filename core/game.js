@@ -53,6 +53,8 @@ class Game {
         p.textFont('Helvetica')
         p.textAlign(p.CENTER, p.CENTER)
         p.smooth()
+
+        this.initiateEnemyMovement()
       }
 
       p.draw = () => {
@@ -66,7 +68,6 @@ class Game {
           Helpers.getElementHeight(container)
         )
       }
-      this.initiateEnemyMovement()
     }
 
     // eslint-disable-next-line new-cap
