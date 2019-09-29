@@ -63,12 +63,14 @@ const Config = {
         playerSpeed: 7,
         duration: 5000,
         probability: 0.1,
+        // probability: 1,
         gridVal: 4,
         description: 'Speed'
       },
       yellow: {
         duration: 5000,
         probability: 0.1,
+        // probability: 1,
         gridVal: 5,
         lightFar: 200,
         lightNear: 80,
@@ -78,6 +80,7 @@ const Config = {
         enemySpeed: 1000,
         duration: 5000,
         probability: 0.5,
+        // probability: 1,
         gridVal: 6,
         description: 'Necromancer'
       }

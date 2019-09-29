@@ -34,11 +34,12 @@ class Game {
       // this.debug = new Debug(this.player, this.map)
       this.spotlight = new Spotlight(this.player)
 
-      this.effectIndicator = new Effects(p)
+      this.effectIndicator = new Effects(p, this.player)
 
       p.preload = () => {
         this.map.sprite.loadSprite()
         this.player.sprite.loadSprite()
+        this.effectIndicator.loadSprites()
       }
 
       p.setup = () => {
@@ -185,15 +186,12 @@ class Game {
 
     if (this.redPotionTimeout) clearTimeout(this.redPotionTimeout)
 
-    this.effectIndicator.addEffect(
-      'RED',
-      RED_POWERUP.description,
-      RED_POWERUP.duration
-    )
+    this.effectIndicator.addEffect('RED', RED_POWERUP.description)
 
     setTimeout(() => {
       this.player.powerups.red = false
       this.redPotionTimeout = undefined
+      this.effectIndicator.removeEffect('RED')
     }, RED_POWERUP.duration)
   }
 
@@ -204,16 +202,13 @@ class Game {
 
     if (this.bluePotionTimeout) clearTimeout(this.bluePotionTimeout)
 
-    this.effectIndicator.addEffect(
-      'BLUE',
-      BLUE_POWERUP.description,
-      BLUE_POWERUP.duration
-    )
+    this.effectIndicator.addEffect('BLUE', BLUE_POWERUP.description)
 
     this.bluePotionTimeout = setTimeout(() => {
       console.log('BLUE POWERUP DOWN')
       this.player.powerups.blue = false
       this.bluePotionTimeout = undefined
+      this.effectIndicator.removeEffect('BLUE')
     }, BLUE_POWERUP.duration)
   }
 
@@ -224,16 +219,13 @@ class Game {
 
     if (this.yellowPotionTimeout) clearTimeout(this.yellowPotionTimeout)
 
-    this.effectIndicator.addEffect(
-      'YELLOW',
-      YELLOW_POWERUP.description,
-      YELLOW_POWERUP.duration
-    )
+    this.effectIndicator.addEffect('YELLOW', YELLOW_POWERUP.description)
 
     this.yellowPotionTimeout = setTimeout(() => {
       console.log('YELLOW POWERUP DOWN')
       this.player.powerups.yellow = false
       this.yellowPotionTimeout = undefined
+      this.effectIndicator.removeEffect('YELLOW')
     }, YELLOW_POWERUP.duration)
   }
 
@@ -251,17 +243,14 @@ class Game {
 
     if (this.greenPotionTimeout) clearTimeout(this.greenPotionTimeout)
 
-    this.effectIndicator.addEffect(
-      'GREEN',
-      GREEN_POWERUP.description,
-      GREEN_POWERUP.duration
-    )
+    this.effectIndicator.addEffect('GREEN', GREEN_POWERUP.description)
 
     this.greenPotionTimeout = setTimeout(() => {
       console.log('GREEN POWERUP DOWN')
       clearInterval(this.monsterInterval)
       this.initiateEnemyMovement()
       this.greenPotionTimeout = undefined
+      this.effectIndicator.removeEffect('GREEN')
     }, GREEN_POWERUP.duration)
   }
 

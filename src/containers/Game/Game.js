@@ -29,6 +29,7 @@ const SpotlightWrapper = styled.div`
     transparent 160px,
     rgba(0, 0, 0) 200px
   );
+  transition: 0.5s ease-in all;
 `
 
 const EffectWrapper = styled.div`
