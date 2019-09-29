@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/the-room/static/css/main.340c2443.chunk.css",
-    "main.js": "/the-room/static/js/main.bd72e617.chunk.js",
-    "main.js.map": "/the-room/static/js/main.bd72e617.chunk.js.map",
+    "main.js": "/the-room/static/js/main.f3ac5b48.chunk.js",
+    "main.js.map": "/the-room/static/js/main.f3ac5b48.chunk.js.map",
     "runtime~main.js": "/the-room/static/js/runtime~main.8897cd81.js",
     "runtime~main.js.map": "/the-room/static/js/runtime~main.8897cd81.js.map",
     "static/js/2.d0fff31e.chunk.js": "/the-room/static/js/2.d0fff31e.chunk.js",
     "static/js/2.d0fff31e.chunk.js.map": "/the-room/static/js/2.d0fff31e.chunk.js.map",
     "index.html": "/the-room/index.html",
-    "precache-manifest.d4912b87e5e4603870c768a090ac0e3e.js": "/the-room/precache-manifest.d4912b87e5e4603870c768a090ac0e3e.js",
+    "precache-manifest.a8701b271e3b009e20cdece295190304.js": "/the-room/precache-manifest.a8701b271e3b009e20cdece295190304.js",
     "service-worker.js": "/the-room/service-worker.js",
     "static/css/main.340c2443.chunk.css.map": "/the-room/static/css/main.340c2443.chunk.css.map",
     "static/media/13_vortex_spritesheet.png": "/the-room/static/media/13_vortex_spritesheet.a8c4d5d4.png",
